@@ -859,9 +859,4 @@ Unfortunately this success has not given a solution to the problem of creating a
 
 In the folder `/etc/certs/` of the router there are some Private Key files but none of them correspond to the Public Key embedded in the `sig_verify` executable.
 
-Checking all the files, in the router root file system, to find the binary sequence of the MPI modulus it is possible to find the these MPIs are embedded in the boot loader and in the package manager `opkg`; this package manager is used, locally, in the last phase of the firmware update. This probably means that both the kernel and the packages added at the end of the firmware upgrade process are signed with the supplier's private key. For example the kernel is signed:
-
-```
-valerio@ubuntu-hp:~/br/buildroot-armv7/pub-key$ ./mysig_verify.sh ~/dva-5592/firmware/_DVA-5592_A1_WI_20180405.sig.extracted/jffs2-root/fs_1/vmlinux.lz
-Verified OK
-```
+Checking all the files, in the router root file system, to find the binary sequence of the MPI modulus it is possible to find the these MPIs are embedded in the boot loader and in the package manager `opkg`; this package manager is used, locally, in the last phase of the firmware update. This probably means that both the kernel and the packages added at the end of the firmware upgrade process are signed with the supplier's private key.
