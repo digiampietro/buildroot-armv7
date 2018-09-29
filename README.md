@@ -20,6 +20,11 @@ On a Linux box, the only OS supported:
       qemu-system-ppc qemu-system-s390x qemu-system-sparc qemu-system-x86 \
       qemu-user qemu-user-binfmt qemu-utils
     ```
+  * install [Binwalk](https://github.com/ReFirmLabs/binwalk), using something similar to the following commands:
+    ```
+    $ sudo apt-get install binwalk
+    ```
+  * install [Jefferson](https://github.com/sviehb/jefferson), following instructions on the GitHub repository
   * download this project with command similar to the followings:
     ```
     valerio@ubuntu-hp:~$ mkdir br      # configuration script will create folders here
