@@ -76,6 +76,29 @@ On a Linux box, the only OS supported:
     DVA-5592_A1_WI_20180405.sig  root-fs.bin
     boot-fs.bin                  set-nandsim.sh
     ```
+  * to exit from the Qemu virtual machine you can type `# halt` and then press `Ctrl-A` followed by the key `X`
+
+# Table of Content
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Description](#description)
+- [Quick Start](#quick-start)
+- [Table of Content](#table-of-content)
+- [Building the emulation environment](#building-the-emulation-environment)
+	- [Emulation environment requirements](#emulation-environment-requirements)
+	- [Choosing the tool to build the Root File System](#choosing-the-tool-to-build-the-root-file-system)
+	- [Issues to overcome](#issues-to-overcome)
+- [Reverse Engineering Router's Binaries](#reverse-engineering-routers-binaries)
+	- [Reverse Engineering `sig_verify`](#reverse-engineering-sigverify)
+		- [Listing `sig_verify` library calls](#listing-sigverify-library-calls)
+		- [Starting the emulated Machine](#starting-the-emulated-machine)
+		- [Starting `gdbserver` on the emulated Machine](#starting-gdbserver-on-the-emulated-machine)
+		- [Starting `gdb` in the host machine](#starting-gdb-in-the-host-machine)
+		- [Generate a Public Key file in *pem* format with the MPIs in `sig_verify`](#generate-a-public-key-file-in-pem-format-with-the-mpis-in-sigverify)
+		- [`mysig_verify`: a script that does the same job as `sig_verify`](#mysigverify-a-script-that-does-the-same-job-as-sigverify)
+		- [Conclusion on reverse engineering `sig_verify`](#conclusion-on-reverse-engineering-sigverify)
+
+<!-- /TOC -->
 
 # Building the emulation environment
 
