@@ -1,0 +1,11 @@
+--- a/arch/arm/include/asm/module.h.orig	2018-07-16 08:53:43.653548106 +0200
++++ b/arch/arm/include/asm/module.h	2018-07-16 08:54:15.617549634 +0200
+@@ -31,7 +31,7 @@
+ 
+ /* Add __virt_to_phys patching state as well */
+ #ifdef CONFIG_ARM_PATCH_PHYS_VIRT
+-#define MODULE_ARCH_VERMAGIC_P2V "p2v8 "
++#define MODULE_ARCH_VERMAGIC_P2V ""
+ #else
+ #define MODULE_ARCH_VERMAGIC_P2V ""
+ #endif

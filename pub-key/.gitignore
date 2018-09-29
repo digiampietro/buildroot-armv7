@@ -1,0 +1,8 @@
+*.bin
+*.xml
+*~
+*.orig
+*.out
+pubkey.der
+pubkey.pem
+

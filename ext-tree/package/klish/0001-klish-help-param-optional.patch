@@ -1,0 +1,45 @@
+diff -uNr a/clish/shell/shell_xml.c b/clish/shell/shell_xml.c
+--- a/clish/shell/shell_xml.c	2015-01-12 16:05:48.000000000 +0100
++++ b/clish/shell/shell_xml.c	2018-09-11 12:04:33.364212393 +0200
+@@ -430,10 +430,10 @@
+ 		fprintf(stderr, CLISH_XML_ERROR_ATTR("name"));
+ 		goto error;
+ 	}
+-	if (!help) {
+-		fprintf(stderr, CLISH_XML_ERROR_ATTR("help"));
+-		goto error;
+-	}
++	//if (!help) {
++	//	fprintf(stderr, CLISH_XML_ERROR_ATTR("help"));
++	//	goto error;
++	//}
+ 
+ 	/* check this command doesn't already exist */
+ 	old = clish_view_find_command(v, name, BOOL_FALSE);
+@@ -648,10 +648,10 @@
+ 		fprintf(stderr, CLISH_XML_ERROR_ATTR("name"));
+ 		goto error;
+ 	}
+-	if (!help) {
+-		fprintf(stderr, CLISH_XML_ERROR_ATTR("help"));
+-		goto error;
+-	}
++	//if (!help) {
++	//	fprintf(stderr, CLISH_XML_ERROR_ATTR("help"));
++	//	goto error;
++	//}
+ 	if (!ptype) {
+ 		fprintf(stderr, CLISH_XML_ERROR_ATTR("ptype"));
+ 		goto error;
+diff -uNr a/clish.xsd b/clish.xsd
+--- a/clish.xsd	2015-01-12 12:04:08.000000000 +0100
++++ b/clish.xsd	2018-09-11 11:49:04.244182706 +0200
+@@ -63,7 +63,7 @@
+ -->
+     <xs:attributeGroup name="menu_item_g">
+         <xs:attribute name="name" type="xs:string" use="required"/>
+-        <xs:attribute name="help" type="xs:string" use="required"/>
++        <xs:attribute name="help" type="xs:string" use="optional"/>
+     </xs:attributeGroup>
+     <!--
+ *******************************************************

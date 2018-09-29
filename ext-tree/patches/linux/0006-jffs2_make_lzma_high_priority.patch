@@ -1,0 +1,12 @@
+diff -ruN a/fs/jffs2/compr.h b/fs/jffs2/compr.h
+--- a/fs/jffs2/compr.h	2018-07-31 16:21:27.608789305 +0200
++++ b/fs/jffs2/compr.h	2018-07-31 16:22:36.028792576 +0200
+@@ -29,7 +29,7 @@
+ #define JFFS2_DYNRUBIN_PRIORITY  20
+ #define JFFS2_LZARI_PRIORITY     30
+ #define JFFS2_RTIME_PRIORITY     50
+-#define JFFS2_LZMA_PRIORITY      70
++#define JFFS2_LZMA_PRIORITY      95
+ #define JFFS2_ZLIB_PRIORITY      80
+ #define JFFS2_LZO_PRIORITY       90
+ 

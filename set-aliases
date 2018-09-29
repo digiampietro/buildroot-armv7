@@ -1,0 +1,21 @@
+#!/bin/bash
+
+function pathmunge () {
+    if ! echo "$PATH" | /bin/grep -Eq "(^|:)$1($|:)" ; then
+        if [ "$2" = "after" ] ; then
+            PATH="$PATH:$1"
+        else
+            PATH="$1:$PATH"
+        fi
+    fi
+}
+
+export DVAEMUDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+. $DVAEMUDIR/set-env.sh > /dev/null
+
+pathmunge $BRDIR/output/host/usr/bin after
+
+alias cdbr="cd $DVAEMUDIR"               # Build Root custom folder
+alias cdqr="cd $DVAEMUDIR/qemu-run"      # Qemu Run folder
+alias cdjr="cd $DVAROOT"                 # Jffs2 Root file system
+alias cdeb="cd $BR2EXT/board/dvaemu"     # External tree Board folder
