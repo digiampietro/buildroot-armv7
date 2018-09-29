@@ -62,15 +62,15 @@ On a Linux box, the only OS supported:
     root@buildroot:~#
     ```
   * an ARM virtual machine is now available to run debug and reverse engineer the most interesting router executables. The router root file system has been included in the ARM image in the folder `/dva-root`, the firmware files and file system images are included in the folder `/dva-firm`:
-  ```
-  root@buildroot:~# ls /dva-root/
-  bin         dev.tar.gz  mnt         sbin        usr
-  data        etc         proc        sys         var
-  dev         lib         root        tmp         www
-  root@buildroot:~# ls /dva-firm/
-  DVA-5592_A1_WI_20180405.sig  root-fs.bin
-  boot-fs.bin                  set-nandsim.sh
-  ```
+    ```
+    root@buildroot:~# ls /dva-root/
+    bin         dev.tar.gz  mnt         sbin        usr
+    data        etc         proc        sys         var
+    dev         lib         root        tmp         www
+    root@buildroot:~# ls /dva-firm/
+    DVA-5592_A1_WI_20180405.sig  root-fs.bin
+    boot-fs.bin                  set-nandsim.sh
+    ```
 
 # Building the emulation environment
 
