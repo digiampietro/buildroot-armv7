@@ -22,6 +22,6 @@ docker run      -h BRHOST                         \
                 -e GHOME=$GHOME                   \
                 -e GSHELL=$SHELL                  \
                 -e GRUNXTERM=$GRUNXTERM           \
-		-e GPWD=$GPWD                     \
+                -e GPWD=$GPWD                     \
                 -it digiampietro/buildroot-armv7
 

@@ -2,7 +2,7 @@
 
 This is a work in progress, it is fully usable and runs correctly, but documentation is still incomplete.
 
-**Buildroot-armv7** is a set of scripts, configuration files and Buildroot external tree to easily setup an emulation environment where to run, debug and reverse engineer the *Netgear DVA 5592* router executables. This environment uses Docker, Buildroot and Qemu to build a root file system and emulate a board with an ARMv7 Cortex A9 processor, a quite old Linux kernel, version 3.4.11-rt19 with appropriate patches, uClibc 0.9.33.2, and old versions of other libraries.
+**Buildroot-armv7** is a Docker image (in wich Buildroot is not included), a set of scripts, configuration files and Buildroot external tree to easily setup an emulation environment where to run, debug and reverse engineer the *Netgear DVA 5592* router executables. This environment uses Docker, Buildroot and Qemu to build a root file system and emulate a board with an ARMv7 Cortex A9 processor, a quite old Linux kernel, version 3.4.11-rt19 with appropriate patches, uClibc 0.9.33.2, and old versions of other libraries.
 
 # Quick Start
 
@@ -79,7 +79,6 @@ On a Linux box, the only OS supported:
   * to exit from the Qemu virtual machine you can type `# halt` and then press `Ctrl-A` followed by the key `X`
 
 # Table of Content
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [Description](#description)
 - [Quick Start](#quick-start)
@@ -88,6 +87,7 @@ On a Linux box, the only OS supported:
 	- [Emulation environment requirements](#emulation-environment-requirements)
 	- [Choosing the tool to build the Root File System](#choosing-the-tool-to-build-the-root-file-system)
 	- [Issues to overcome](#issues-to-overcome)
+	- [The Docker image](#the-docker-image)
 - [Reverse Engineering Router's Binaries](#reverse-engineering-routers-binaries)
 	- [Reverse Engineering `sig_verify`](#reverse-engineering-sigverify)
 		- [Listing `sig_verify` library calls](#listing-sigverify-library-calls)
@@ -98,10 +98,7 @@ On a Linux box, the only OS supported:
 		- [`mysig_verify`: a script that does the same job as `sig_verify`](#mysigverify-a-script-that-does-the-same-job-as-sigverify)
 		- [Conclusion on reverse engineering `sig_verify`](#conclusion-on-reverse-engineering-sigverify)
 
-<!-- /TOC -->
-
 # Building the emulation environment
-
 The purpose of the emulation environment is to run, as much as possible, router executables in a Qemu virtual machine. This means not only that the machine must have an ARM v7 Cortex-A9 processor, but that the kernel and the libraries should be the same version, or compatible versions, used in the router.
 
 ## Emulation environment requirements
@@ -123,13 +120,78 @@ The root file system can be built with a cross compilation toolchain able to gen
 Buildroot has been the tool chosen for this reverse engineering project. It has been easy to learn ed effective in building the required root file system.
 
 ## Issues to overcome
-Initial idea was using the latest Buildroot version available (*buildroot-2018-05*) on the last Ubuntu version (*18.04.1 LTS, Bionic Beaver*), but this buildroot version doesn't have the option to use uClibc, it has uClibc-ng that is not fully compatible with the router's binaries compiled with the uClibc; the Gnu libgcrypt crypto library is a newer version, not fully compatible with the router's binaries. It is practically impossible to downgrade these two libraries and others because of the *dependency hell*.
+Initial idea was using the latest Buildroot version available (*buildroot-2018-05*) on the last Ubuntu version (*18.04.1 LTS, Bionic Beaver*), but this buildroot version doesn't have the option to use uClibc, it has uClibc-ng that is not fully compatible with the router's binaries compiled with uClibc; the Gnu libgcrypt crypto library is a newer version, not fully compatible wth the router's binaries. It is practically impossible to downgrade these two libraries and others because of the *dependency hell*.
 
 Another idea was to use an older Buildroot version (*buildroot-2014-02*) that has the same router's uClibc version, compatible version of Gnu libgcrypt crypto library and similar versions of other libraries. The problem is that this buildroot version, on Ubuntu 18.04, gives multiple compilation errors, almost impossible to fix; changing gcc version doesn't help to solve all the issues.
 
 The solution has been to use a Docker image, based on *Debian Wheezy* released in 2013, to run *buildroot-2014-02*; this docker image is able to run this version of buildroot without any issues.
 
 During the setup of this environment many other issues have arisen, described below in the description of various configurations.
+
+## The Docker image
+The main purpose of the Docker image is to have a Linux environment able to run *buildroot-214.02* without issues, for this reason the image is based on Debian Wheezy (released in 2013) with additional packages needed to run *buildroot-2014.02*, including packages and QT libraries to do a `make xconfig` with a GUI. The [Docekerfile](https://github.com/digiampietro/buildroot-armv7/blob/master/docker/Dockerfile) is quite simple and doesn't include Buildroot.
+
+Buildroot is installed in the user's home directory because both the user and his home directory are mapped inside the Docker image using the following shell script, [`docker/dockrun.sh`](https://github.com/digiampietro/buildroot-armv7/blob/master/docker/dockrun.sh), to run the Docker image:
+```shell
+#!/bin/sh
+
+export GDISPLAY=unix/$DISPLAY      # forward X11 display to the host machine
+export GUSERNAME=`id -u -n`        # current user's username
+export GUID=`id -u`                # current user's user id
+export GGROUP=`id -g -n`           # current user's primary group name
+export GGID=`id -g`                # current user's primary group id
+export GHOME=$HOME                 # current user's home directory
+export GSHELL=$SHELL               # current user's shell
+export GRUNXTERM=0                 # start lxtermina, useful in windows
+export GPWD=`pwd`                  # current working directory
+
+docker run      -h BRHOST                         \
+                --rm                              \
+                -v /tmp/.X11-unix:/tmp/.X11-unix  \
+                -v $HOME:$HOME                    \
+                -e DISPLAY=$GDISPLAY              \
+                -e GUSERNAME=$GUSERNAME           \
+                -e GUID=$GUID                     \
+                -e GGROUP=$GGROUP                 \
+                -e GGID=$GGID                     \
+                -e GHOME=$GHOME                   \
+                -e GSHELL=$SHELL                  \
+                -e GRUNXTERM=$GRUNXTERM           \
+                -e GPWD=$GPWD                     \
+                -it digiampietro/buildroot-armv7
+```
+In this script:
+  * the user's home directory (*$HOME*) is mapped, with option `-v`, inside the running image at exactly the same position
+  * the `-v /tmp/.X11-unix:/tmp/.X11-unix` option has the purpose do display, on the host, X11 applications running inside the Docker image
+  * the `--rm` options terminate the Docker image process after exiting from the interactive shell; This is needed to prevent having a lot of unused stopped images
+  * some environment variables (options `-v`) are passed from the host to the docker image with the purpose to create, on the fly, inside the image, the same user existing on the host with exact same attributes (username, uid, primary group, shell, home dir). This job is accomplished by the **entrypoint** script `docekr/startup.sh`:
+
+  ```shell
+#!/bin/sh
+#
+# add current user and user's primary group
+#
+groupadd -g $GGID $GGROUP
+useradd  -u $GUID -s $GSHELL -c $GUSERNAME -g $GGID -M -d $GHOME $GUSERNAME
+usermod  -a -G sudo $GUSERNAME
+echo $GUSERNAME:docker | chpasswd
+if [ "$GRUNXTERM" = "1" ]
+then
+    # become the current user and start a shell
+    su -l -c lxterminal $GUSERNAME
+    # another root shel
+    lxterminal
+else
+    # become the current user and start a shell
+    su -l $GUSERNAME
+    # another root shell
+    /bin/bash
+fi
+  ```
+
+This Docker usage pattern allows to transparently share the user's home directory between the host and the Docker image and can be used every time there is a need to use a Docker image to transparently run software that cannot be run on the host and that will use and/or modify files in user's home directory.
+
+In this case the *Buildroot* folder is not installed inside the Docker image, but will be installed in user's home directory and, in this way, the Buildroot folder will remain persistent across Docker image invocations.
 
 # Reverse Engineering Router's Binaries
 
