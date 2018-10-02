@@ -36,13 +36,13 @@ On a Linux box, the only OS supported:
     valerio@ubuntu-hp:~/br$ cd buildroot-armv7   
     valerio@ubuntu-hp:~/br/buildroot-armv7$ ./br-armv7-config.sh
     ```
-  * create the docker image with the following commands
+  * download the docker image from the Docker repository
     ```
-    valerio@ubuntu-hp:~/br/buildroot-armv7$ cd docker/
-    valerio@ubuntu-hp:~/br/buildroot-armv7/docker$ ./dockbuild.sh
+    valerio@ubuntu-hp:~/br/buildroot-armv7$ docker pull digiampietro/buildroot-armv7
     ```
   * run the docker image, it is based on the old Debian Wheezy to run the old buildroot-2014-02; the current username and home directory are mapped inside the docker host. Inside the docker host the command prompt has changed, the hostname now is *BRHOST*:
     ```
+    valerio@ubuntu-hp:~/br/buildroot-armv7$ cd docker/
     valerio@ubuntu-hp:~/br/buildroot-armv7/docker$ ./dockrun.sh
     valerio@BRHOST:~$ cd ~/br/buildroot-armv7
     ```
@@ -192,6 +192,134 @@ fi
 This Docker usage pattern allows to transparently share the user's home directory between the host and the Docker image and can be used every time there is a need to use a Docker image to transparently run software that cannot be run on the host and that will use and/or modify files in user's home directory.
 
 In this case the *Buildroot* folder is not installed inside the Docker image, but will be installed in user's home directory and, in this way, the Buildroot folder will remain persistent across Docker image invocations.
+
+## Buildroot configuration
+
+The Buildroot configuration is stored in an external tree in the folder `ext-tree`, Buildroot itself can be launched with the shell script `brmake` that, basically, change directory in the Buildroot directory and execute a `make BR2_EXTERNAL=<path to ext-tree>`.
+
+The `ext-tree` folder has the following content:
+```
+ext-tree/
+├── board
+│   └── dvaemu
+│       ├── kernel-defconfig
+│       ├── overlay
+│       │   └── etc
+│       │       └── profile.d
+│       │           └── set-prompt.sh
+│       └── post-build.sh
+├── Config.in
+├── configs
+│   ├── dvaemu-emu_arm_vexpress_defconfig
+│   └── uClibc-0.9.33.config
+├── external.desc
+├── external.mk
+├── package
+│   └── klish
+│       ├── 0001-klish-help-param-optional.patch
+│       ├── Config.in
+│       └── klish.mk
+└── patches
+    └── linux
+        ├── 0002-module.h-remove-p2v8-from-module-id-string.patch
+        ├── 0004-jffs2_make_lzma_available.patch
+        ├── 0005-jffs2_eofdetect.patch
+        └── 0006-jffs2_make_lzma_high_priority.patch
+```
+
+  * **ext-tree/board/dvaemu** contains files for the *fictitious* board called *dvaemu* (for DVA 5592 router emulation)
+
+  * **ext-tree/board/dvaemu/kernel-defconfig** contains the kernel configuration, saved in a *defconfig* file; main differences, compared with the default kernel configuration, are to be more similar to the router's kernetel and to run in QEMU:
+    - *General setup*
+      - Choose SLAB allocator: SLAB, this is needed to run some binaries/Libraries
+    - *System type*: Versatile Express platform type with Device Tree support
+    - *Preemption Model*: Preemptible Kernel (low latency Desktop)
+    - *Device Drivers*
+      - NAND Device Support
+      - OneNAND Device Support
+      - Enable UBI
+    - *File Systems*
+      - Miscellaneous filesystems: JFFS2 support, Advanced Compression, JFFS2 LZMA compression supported
+    - *Library routines*
+      - CRC-CCITT functions
+      - CRC16 functions
+      - CRC calculations for the T10 Data Integrity Field
+      - CRC ITU-T V.41 functions
+
+  * **ext-tree/board/dvaemu/overlay** there is the `set-prompt.sh` script used to setup the prompt inside the QEMU emulated Machine
+
+  * **ext-tree/board/dvaemu/post-build.sh** this is the Buildroot post-build script, used mainly to copy router's root file system and firmware to the root image of the emulated machine
+
+  * **ext-tree/Config.in, external.desc, external.mk** are files needed by Buildroot in the external tree
+
+  * **ext-tree/configs/dvaemu-emu_arm_vexpress_defconfig** contains the buildroot configuration, it is based on the *qemu_arm_vexpress_defconfig*, included in buildroot, to emulate a *Versatile Express ARM board* with an ARMv7 Cortex-A9 processor. The most important changed options are:
+    - *Target Option: EABIhf*, because the router's CPU seems to support hardware floating point processing
+    - *Build Options* the selected options are needed to make easier the reverse engineering job:
+        - *Build packages with debugging symbols*
+        - *gcc debug level 2*
+        - *strip binaries: no*
+        - *gcc optimization level 0*
+        - *global patch directories*, to point to the external tree patch directory
+    - *Toolchain* the selected options are needed to enable and facilitate debugging and to compile the 3.4.11-rt9 Kernel
+      - Kernle Headers: 3.4.x
+      - Enable large file support
+      - Enable WCHAR support
+      - Thread library debugging
+      - Enable C++ support
+      - Build cross GDB for the host
+    - *Linux Kernel* the selected options are needed to select the 3.4.11-rt9 kernel and to run it under QEMU:
+      - Custom tarball location
+      - Kernel configuration: using a custom config file
+      - Device tree support
+      - Install kernel image to /boot Target
+    - *Compressor and Decompressor* useful for the purpose of emulating the router environment
+      - bzip2
+      - xz-utils
+    - *Debugging profiling and benchmark* the selected options are useful for reverse engineering
+      - gdb (gdbserver and full debugger)
+      - ltrace
+      - strace
+    - *Development tools*
+      - binutils, flex, libtools, make, pkgconf
+      - mtd, jffs2 and ubi/ubifs tools; these are very important because are related to flash eeprom Emulation
+    - *Libraries*, the selected options are needed to emulate binaries requiring the selected libraries
+      - libgcrypt, expat, roxml, libxml2, Mini-XML
+    - *Network Applications* are selected to easy file exchange between the emulated machine and the external worlds
+      - rsync, rsh-redone, socat, ncftp, iputils
+    - *Shell and utilities*
+      - file, sudo
+    - *Host utilities*
+      - host mtd, jffs2 and ubi/ubifs tools
+    - *User provided options*
+      - klish, to try to emulate the router's shell
+
+  * **ext-tree/configs/uClibc-0.9.33.config** this is the uClibc configuration, the main differences compared to the default are to be compatible with the router's binaries and to include debugging symbols in the library files. The inclusion of debugging symbols has been problematic: uClibc don't obey to the general option included in the Buildroot configuration, has his own flag for this purpose; the problem is that enabling his own flag the compilation gives impossible to fix errors, for this reason a workaround, described below, has been used:
+    - *Target Architecture Features and Options*
+      - Build for EABI
+      - Use BX in function return
+      - Enable full C99 math library support
+    - *General Library Settings*
+      - Enable library loader preload file, not selected
+      - Link LD Config statically, not selected
+      - Thread support, native POSIX Threading
+      - Build pthreads debugging supported
+      - Malloc returns live pointer for malloc(0)
+      - Provide libutil library and functions
+    - *String and Stdio support*
+      - Wide character support
+      - Support hexadecimal float notation
+      - Support glibc's register_printf_function()
+      - Some other glibc compatible settings
+    - *Development/debugging options*
+      - in Compiler Warnings add the string "-ggdb", this is the work around to compile the uClibc with debugging symbols
+
+  * **ext-tree/package** in this directory is included the *klish* package, but, unfortunately, it is not compatible with the router's *klish* configuration files, probably the *klish* application in the router has been modified in incompatible ways
+
+  * **ext-tree/patches/linux** linux patches to have the kernel more similar to the router's kernel, the patches are:
+    - *0002-module.h-remove-p2v8-from-module-id-string.patch* to make the kernel identifying string identical to the router's kernel modules, but, unfortunately, in this way it is possible to load router's module in the emulated machine, but the kernel crashes
+    - *0004-jffs2_make_lzma_available.patch* this patch implements the LZMA compression for the JFFS2 file system, it has been borrowed and adapted from the OpenWRT project
+    - *0005-jffs2_eofdetect.patch* this patch implements the *end of partition detection* for JFFS2 filesystems, this patche is included in the router's kernel and automatically detect the end of a JFFS2 partition, thanks to a magic number
+    - *0006-jffs2_make_lzma_high_priority.patch* this patch makes LZMA compression the preferred compression method for the JFFS2 partition, similar to what the router's kernel does.  
 
 # Reverse Engineering Router's Binaries
 
