@@ -235,7 +235,7 @@ ext-tree/
     - *System type*: Versatile Express platform type with Device Tree support
     - *Preemption Model*: Preemptible Kernel (low latency Desktop)
     - *Device Drivers*
-      - NAND Device Support
+      - NAND Device Support and Support for NAND Flash Simulator, this is very important to simulate the JFFS2 file system on the flash memory
       - OneNAND Device Support
       - Enable UBI
     - *File Systems*
