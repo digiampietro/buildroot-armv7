@@ -4,6 +4,28 @@ This is a work in progress, it is fully usable and runs correctly, but documenta
 
 **Buildroot-armv7** is a Docker image (in wich Buildroot is not included), a set of scripts, configuration files and Buildroot external tree to easily setup an emulation environment where to run, debug and reverse engineer the *Netgear DVA 5592* router executables. This environment uses Docker, Buildroot and Qemu to build a root file system and emulate a board with an ARMv7 Cortex A9 processor, a quite old Linux kernel, version 3.4.11-rt19 with appropriate patches, uClibc 0.9.33.2, and old versions of other libraries.
 
+# Table of Contents
+
+- [Description](#description)
+- [Quick Start](#quick-start)
+- [Table of Content](#table-of-content)
+- [Building the emulation environment](#building-the-emulation-environment)
+	- [Emulation environment requirements](#emulation-environment-requirements)
+	- [Choosing the tool to build the Root File System](#choosing-the-tool-to-build-the-root-file-system)
+	- [Issues to overcome](#issues-to-overcome)
+	- [The Docker image](#the-docker-image)
+	- [Buildroot configuration](#buildroot-configuration)
+	- [Running Buildroot](#running-buildroot)
+- [Reverse Engineering Router's Binaries](#reverse-engineering-routers-binaries)
+	- [Reverse Engineering `sig_verify`](#reverse-engineering-sigverify)
+		- [Listing `sig_verify` library calls](#listing-sigverify-library-calls)
+		- [Starting the emulated Machine](#starting-the-emulated-machine)
+		- [Starting `gdbserver` on the emulated Machine](#starting-gdbserver-on-the-emulated-machine)
+		- [Starting `gdb` in the host machine](#starting-gdb-in-the-host-machine)
+		- [Generate a Public Key file in *pem* format with the MPIs in `sig_verify`](#generate-a-public-key-file-in-pem-format-with-the-mpis-in-sigverify)
+		- [`mysig_verify`: a script that does the same job as `sig_verify`](#mysigverify-a-script-that-does-the-same-job-as-sigverify)
+		- [Conclusion on reverse engineering `sig_verify`](#conclusion-on-reverse-engineering-sigverify)
+
 # Quick Start
 
 On a Linux box, the only OS supported:
@@ -78,26 +100,6 @@ On a Linux box, the only OS supported:
     ```
   * to exit from the Qemu virtual machine you can type `# halt` and then press `Ctrl-A` followed by the key `X`
 
-# Table of Contents
-
-- [Description](#description)
-- [Quick Start](#quick-start)
-- [Table of Content](#table-of-content)
-- [Building the emulation environment](#building-the-emulation-environment)
-	- [Emulation environment requirements](#emulation-environment-requirements)
-	- [Choosing the tool to build the Root File System](#choosing-the-tool-to-build-the-root-file-system)
-	- [Issues to overcome](#issues-to-overcome)
-	- [The Docker image](#the-docker-image)
-	- [Buildroot configuration](#buildroot-configuration)
-- [Reverse Engineering Router's Binaries](#reverse-engineering-routers-binaries)
-	- [Reverse Engineering `sig_verify`](#reverse-engineering-sigverify)
-		- [Listing `sig_verify` library calls](#listing-sigverify-library-calls)
-		- [Starting the emulated Machine](#starting-the-emulated-machine)
-		- [Starting `gdbserver` on the emulated Machine](#starting-gdbserver-on-the-emulated-machine)
-		- [Starting `gdb` in the host machine](#starting-gdb-in-the-host-machine)
-		- [Generate a Public Key file in *pem* format with the MPIs in `sig_verify`](#generate-a-public-key-file-in-pem-format-with-the-mpis-in-sigverify)
-		- [`mysig_verify`: a script that does the same job as `sig_verify`](#mysigverify-a-script-that-does-the-same-job-as-sigverify)
-		- [Conclusion on reverse engineering `sig_verify`](#conclusion-on-reverse-engineering-sigverify)
 
 # Building the emulation environment
 The purpose of the emulation environment is to run, as much as possible, router executables in a Qemu virtual machine. This means not only that the machine must have an ARM v7 Cortex-A9 processor, but that the kernel and the libraries should be the same version, or compatible versions, used in the router.
@@ -320,7 +322,24 @@ ext-tree/
     - *0002-module.h-remove-p2v8-from-module-id-string.patch* to make the kernel identifying string identical to the router's kernel modules, but, unfortunately, in this way it is possible to load router's module in the emulated machine, but the kernel crashes
     - *0004-jffs2_make_lzma_available.patch* this patch implements the LZMA compression for the JFFS2 file system, it has been borrowed and adapted from the OpenWRT project
     - *0005-jffs2_eofdetect.patch* this patch implements the *end of partition detection* for JFFS2 filesystems, this patch is included in the router's kernel and automatically detect the end of a JFFS2 partition, thanks to a magic number
-    - *0006-jffs2_make_lzma_high_priority.patch* this patch makes LZMA compression the preferred compression method for the JFFS2 partition, similar to what the router's kernel does.  
+    - *0006-jffs2_make_lzma_high_priority.patch* this patch makes LZMA compression the preferred compression method for the JFFS2 partition, similar to what the router's kernel does.
+
+## Running Buildroot
+
+The [Buildroot User's Manual](https://buildroot.org/downloads/manual/manual.html) is a very good guide on how to configure and run Buildroot; in this environment Buildroot make commands should be executed using the *brmake* script inside the *buildroot-armv7* folder, the most useful commands are:
+
+  * `./brmake xconfig` (or `./brmake menu-config`) to configure Buildroot options;
+  * `./brmake linux-xconfig` (or `./brmake linux-menuconfig`) to configure the Linux Kernel
+  * `./brmake uclibc-menuconfig` (the *xconfig* version is not available for *uClibc*) to configure the *uClibc* library
+  * `./brmake savedefconfig` to save the Buildroot configuration in the external tree, on the file `ext-tree/configs/dvaemu-emu_arm_vexpress_defconfig`
+  * `./brmake linux-update-defconfig` to save the Linux Kernel configuration in the external tree, on the file `ext-tree/board/dvaemu/kernel-defconfig`
+  * `./brmake uclibc-update-defconfig` to save the uClibc configuration in the external tree, on the file `ext-tree/configs/uClibc-0.9.33.config`
+  * `./brmake clean` to delete all build products (including build directories, host, staging and target trees, the images and the toolchain)
+  * `./brmake distclean` to delete everything, including configuration files; needed to build for a new target, should not be needed with this environment;
+  * `./brmake linux-dirclean` removes the whole kernel build directory, to be used when kernel configuration changes are made;
+  * `./brmake -s printvars` to dump all the variables known to make.
+  
+  
 
 # Reverse Engineering Router's Binaries
 
