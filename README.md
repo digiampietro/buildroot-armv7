@@ -78,7 +78,7 @@ On a Linux box, the only OS supported:
     ```
   * to exit from the Qemu virtual machine you can type `# halt` and then press `Ctrl-A` followed by the key `X`
 
-# Table of Content
+# Table of Contents
 
 - [Description](#description)
 - [Quick Start](#quick-start)
