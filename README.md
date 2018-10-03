@@ -9,7 +9,7 @@ This is a work in progress, it is fully usable and runs correctly, but documenta
 On a Linux box, the only OS supported:
 
   * install Docker, [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04), or similar guides, can be useful
-  * add your username to the *docker* group with a command similar to the following:
+  * add your username to the *docker* group with a command similar to the following (can be different in some Linux distributions):
      ```
      $ sudo adduser *yourusername* docker
      ```
@@ -31,7 +31,7 @@ On a Linux box, the only OS supported:
     valerio@ubuntu-hp:~$ cd br
     valerio@ubuntu-hp:~/br$ git clone https://github.com/digiampietro/buildroot-armv7.git buildroot-armv7
     ```
-  * type the following commands to download Buildroot, Linux kernel, router firmware and configure the environment
+  * type the following commands, the `br-armv7-config.sh` script will download Buildroot, Linux kernel, router firmware and will configure the environment
     ```
     valerio@ubuntu-hp:~/br$ cd buildroot-armv7   
     valerio@ubuntu-hp:~/br/buildroot-armv7$ ./br-armv7-config.sh
@@ -88,6 +88,7 @@ On a Linux box, the only OS supported:
 	- [Choosing the tool to build the Root File System](#choosing-the-tool-to-build-the-root-file-system)
 	- [Issues to overcome](#issues-to-overcome)
 	- [The Docker image](#the-docker-image)
+	- [Buildroot configuration](#buildroot-configuration)
 - [Reverse Engineering Router's Binaries](#reverse-engineering-routers-binaries)
 	- [Reverse Engineering `sig_verify`](#reverse-engineering-sigverify)
 		- [Listing `sig_verify` library calls](#listing-sigverify-library-calls)
@@ -142,7 +143,7 @@ export GGROUP=`id -g -n`           # current user's primary group name
 export GGID=`id -g`                # current user's primary group id
 export GHOME=$HOME                 # current user's home directory
 export GSHELL=$SHELL               # current user's shell
-export GRUNXTERM=0                 # start lxtermina, useful in windows
+export GRUNXTERM=0                 # flag start lxterminal, useful in windows
 export GPWD=`pwd`                  # current working directory
 
 docker run      -h BRHOST                         \
@@ -161,10 +162,10 @@ docker run      -h BRHOST                         \
                 -it digiampietro/buildroot-armv7
 ```
 In this script:
-  * the user's home directory (*$HOME*) is mapped, with option `-v`, inside the running image at exactly the same position
+  * the user's home directory (*$HOME*) is mapped, with option `-v`, inside the running image at exactly the same path
   * the `-v /tmp/.X11-unix:/tmp/.X11-unix` option has the purpose do display, on the host, X11 applications running inside the Docker image
   * the `--rm` options terminate the Docker image process after exiting from the interactive shell; This is needed to prevent having a lot of unused stopped images
-  * some environment variables (options `-v`) are passed from the host to the docker image with the purpose to create, on the fly, inside the image, the same user existing on the host with exact same attributes (username, uid, primary group, shell, home dir). This job is accomplished by the **entrypoint** script `docekr/startup.sh`:
+  * some environment variables (options `-v`) are passed from the host to the docker image with the purpose to create, on the fly, inside the image, the same user existing on the host with exact same attributes (username, uid, primary group, shell, home dir). This job is accomplished by the following **entrypoint** script `docekr/startup.sh`:
 
   ```shell
 #!/bin/sh
@@ -229,7 +230,7 @@ ext-tree/
 
   * **ext-tree/board/dvaemu** contains files for the *fictitious* board called *dvaemu* (for DVA 5592 router emulation)
 
-  * **ext-tree/board/dvaemu/kernel-defconfig** contains the kernel configuration, saved in a *defconfig* file; main differences, compared with the default kernel configuration, are to be more similar to the router's kernetel and to run in QEMU:
+  * **ext-tree/board/dvaemu/kernel-defconfig** contains the kernel configuration, saved in a *defconfig* file; main differences, compared with the default kernel configuration, have been introduced to be more similar to the router's kernel and to run it in QEMU:
     - *General setup*
       - Choose SLAB allocator: SLAB, this is needed to run some binaries/Libraries
     - *System type*: Versatile Express platform type with Device Tree support
@@ -246,36 +247,36 @@ ext-tree/
       - CRC calculations for the T10 Data Integrity Field
       - CRC ITU-T V.41 functions
 
-  * **ext-tree/board/dvaemu/overlay** there is the `set-prompt.sh` script used to setup the prompt inside the QEMU emulated Machine
+  * **ext-tree/board/dvaemu/overlay** in this path's subfolder there is the `set-prompt.sh` script used to setup the prompt inside the QEMU emulated machine
 
   * **ext-tree/board/dvaemu/post-build.sh** this is the Buildroot post-build script, used mainly to copy router's root file system and firmware to the root image of the emulated machine
 
-  * **ext-tree/Config.in, external.desc, external.mk** are files needed by Buildroot in the external tree
+  * **ext-tree/Config.in, external.desc, external.mk** are files needed by Buildroot to use the external tree
 
-  * **ext-tree/configs/dvaemu-emu_arm_vexpress_defconfig** contains the buildroot configuration, it is based on the *qemu_arm_vexpress_defconfig*, included in buildroot, to emulate a *Versatile Express ARM board* with an ARMv7 Cortex-A9 processor. The most important changed options are:
+  * **ext-tree/configs/dvaemu-emu_arm_vexpress_defconfig** contains the buildroot configuration, it is based on the *qemu_arm_vexpress_defconfig*, included in buildroot, to emulate a *Versatile Express ARM board* with an ARMv7 Cortex-A9 processor. The most important modified options are:
     - *Target Option: EABIhf*, because the router's CPU seems to support hardware floating point processing
-    - *Build Options* the selected options are needed to make easier the reverse engineering job:
+    - *Build Options*, the selected options are needed to make easier the reverse engineering job:
         - *Build packages with debugging symbols*
         - *gcc debug level 2*
         - *strip binaries: no*
         - *gcc optimization level 0*
         - *global patch directories*, to point to the external tree patch directory
-    - *Toolchain* the selected options are needed to enable and facilitate debugging and to compile the 3.4.11-rt9 Kernel
+    - *Toolchain*, the selected options are needed to enable and facilitate debugging and to compile the 3.4.11-rt9 Kernel
       - Kernle Headers: 3.4.x
       - Enable large file support
       - Enable WCHAR support
       - Thread library debugging
       - Enable C++ support
       - Build cross GDB for the host
-    - *Linux Kernel* the selected options are needed to select the 3.4.11-rt9 kernel and to run it under QEMU:
+    - *Linux Kernel*, the selected options are needed to select the 3.4.11-rt9 kernel and to run it under QEMU:
       - Custom tarball location
       - Kernel configuration: using a custom config file
       - Device tree support
       - Install kernel image to /boot Target
-    - *Compressor and Decompressor* useful for the purpose of emulating the router environment
+    - *Compressor and Decompressor*, useful for the purpose of emulating the router environment
       - bzip2
       - xz-utils
-    - *Debugging profiling and benchmark* the selected options are useful for reverse engineering
+    - *Debugging profiling and benchmark*, the selected options are useful for reverse engineering
       - gdb (gdbserver and full debugger)
       - ltrace
       - strace
@@ -284,7 +285,7 @@ ext-tree/
       - mtd, jffs2 and ubi/ubifs tools; these are very important because are related to flash eeprom Emulation
     - *Libraries*, the selected options are needed to emulate binaries requiring the selected libraries
       - libgcrypt, expat, roxml, libxml2, Mini-XML
-    - *Network Applications* are selected to easy file exchange between the emulated machine and the external worlds
+    - *Network Applications* are included to exchange files between the emulated machine and the external world
       - rsync, rsh-redone, socat, ncftp, iputils
     - *Shell and utilities*
       - file, sudo
@@ -293,7 +294,7 @@ ext-tree/
     - *User provided options*
       - klish, to try to emulate the router's shell
 
-  * **ext-tree/configs/uClibc-0.9.33.config** this is the uClibc configuration, the main differences compared to the default are to be compatible with the router's binaries and to include debugging symbols in the library files. The inclusion of debugging symbols has been problematic: uClibc don't obey to the general option included in the Buildroot configuration, has his own flag for this purpose; the problem is that enabling his own flag the compilation gives impossible to fix errors, for this reason a workaround, described below, has been used:
+  * **ext-tree/configs/uClibc-0.9.33.config** this is the uClibc configuration, the main differences, compared with the default, have been introduced to be compatible with the router's binaries and to include debugging symbols in the library files. The inclusion of debugging symbols has been problematic: uClibc don't obey to the general option included in the Buildroot configuration, has his own flag for this purpose; the problem is that enabling his own flag the compilation gives impossible to fix errors, for this reason a workaround, described below, has been used:
     - *Target Architecture Features and Options*
       - Build for EABI
       - Use BX in function return
@@ -302,7 +303,7 @@ ext-tree/
       - Enable library loader preload file, not selected
       - Link LD Config statically, not selected
       - Thread support, native POSIX Threading
-      - Build pthreads debugging supported
+      - Build pthreads debugging support
       - Malloc returns live pointer for malloc(0)
       - Provide libutil library and functions
     - *String and Stdio support*
@@ -313,12 +314,12 @@ ext-tree/
     - *Development/debugging options*
       - in Compiler Warnings add the string "-ggdb", this is the work around to compile the uClibc with debugging symbols
 
-  * **ext-tree/package** in this directory is included the *klish* package, but, unfortunately, it is not compatible with the router's *klish* configuration files, probably the *klish* application in the router has been modified in incompatible ways
+  * **ext-tree/package**, in this directory is included the *klish* package, but, unfortunately, it is not compatible with the router's *klish* configuration files, probably the *klish* application in the router has been modified in incompatible ways
 
-  * **ext-tree/patches/linux** linux patches to have the kernel more similar to the router's kernel, the patches are:
+  * **ext-tree/patches/linux**: linux patches to have the kernel more similar to the router's kernel, the patches are:
     - *0002-module.h-remove-p2v8-from-module-id-string.patch* to make the kernel identifying string identical to the router's kernel modules, but, unfortunately, in this way it is possible to load router's module in the emulated machine, but the kernel crashes
     - *0004-jffs2_make_lzma_available.patch* this patch implements the LZMA compression for the JFFS2 file system, it has been borrowed and adapted from the OpenWRT project
-    - *0005-jffs2_eofdetect.patch* this patch implements the *end of partition detection* for JFFS2 filesystems, this patche is included in the router's kernel and automatically detect the end of a JFFS2 partition, thanks to a magic number
+    - *0005-jffs2_eofdetect.patch* this patch implements the *end of partition detection* for JFFS2 filesystems, this patch is included in the router's kernel and automatically detect the end of a JFFS2 partition, thanks to a magic number
     - *0006-jffs2_make_lzma_high_priority.patch* this patch makes LZMA compression the preferred compression method for the JFFS2 partition, similar to what the router's kernel does.  
 
 # Reverse Engineering Router's Binaries

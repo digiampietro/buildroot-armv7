@@ -7,7 +7,7 @@ export GGROUP=`id -g -n`           # current user's primary group name
 export GGID=`id -g`                # current user's primary group id
 export GHOME=$HOME                 # current user's home directory
 export GSHELL=$SHELL               # current user's shell
-export GRUNXTERM=0                 # start lxtermina, useful in windows
+export GRUNXTERM=0                 # flag to start lxterminal, useful in windows
 export GPWD=`pwd`                  # current working directory
 
 docker run      -h BRHOST                         \
