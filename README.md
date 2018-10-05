@@ -384,11 +384,9 @@ To achieve this goal three main activities are needed:
 Some areas of interest in doing these analysis are:
 
   * **upgrade procedure**: looking at the console output during the upgrade process (see the file [``misc/router-console-upgrade.log``](misc/router-console-upgrade.log)) and at the related router's scripts (`/usr/sbin/upgrade-prepare.sh` and `/usr/sbin/upgrade.sh`) it is possible to understand the firmware file layout (may be not every details), where the file system root and boot images are, how these images are written to the NAND flash eeprom. It is also possible to understand that the firmware image is digitally signed and that the router's binary `/usr/sbin/sig_verify` is used to check the signature authenticity; for this reason the first interesting binary to reverse engineer is `sig_verify` to understand if it is possible to modify the firmware and make a valid fake signature; unfortunately this is not possible, but the analysis has been anyway interesting.
-
-	* **klish configuration file**: it is possible to telnet or ssh to the router to get a restricted shell based on the open source [*klish*](http://libcode.org/projects/klish/) project. Looking at the `bin/clish` script and at the startup script it is possible to find that the *clish* configuration file is `/etc/clish/startup.xml`. Analyzing this configuration file it is possible to find that it is possible to enter *factory mode* and get a normal, unprivileged Linux busybox shell. (details on the [*adbtools2*](https://github.com/digiampietro/adbtools2) project).
-
-	* **interesting binaries**: not being able to modify the firmware using the normal firmware upgrade process, because of the firmware signature, it is needed to find some other way to get a root shell on the router to reach the project target. The idea is to use the unprivileged access to exploit some router binary, running as root, to force it to run a specially crafted shell script to get a root shell. So the interesting binaries are those running as root in the router. Using the unprivileged access to get a list of running processes on the router:
-	```
+  * **klish configuration file**: it is possible to telnet or ssh to the router to get a restricted shell based on the open source [*klish*](http://libcode.org/projects/klish/) project. Looking at the `bin/clish` script and at the startup script it is possible to find that the *clish* configuration file is `/etc/clish/startup.xml`. Analyzing this configuration file it is possible to find that it is possible to enter *factory mode* and get a normal, unprivileged Linux busybox shell. (details on the [*adbtools2*](https://github.com/digiampietro/adbtools2) project).
+  * **interesting binaries**: not being able to modify the firmware using the normal firmware upgrade process, because of the firmware signature, it is needed to find some other way to get a root shell on the router to reach the project target. The idea is to use the unprivileged access to exploit some router binary, running as root, to force it to run a specially crafted shell script to get a root shell. So the interesting binaries are those running as root in the router. Using the unprivileged access to get a list of running processes on the router:
+  ```
 	/root $ ps -ef
   PID USER       VSZ STAT COMMAND
     1 0         1184 S    init
@@ -470,7 +468,7 @@ Some areas of interest in doing these analysis are:
  4404 1001      1176 S    /bin/ash
  4405 1001      1176 R    ps -ef
 /root $
-	```   
+  ```   
 
 A first list of interesting binaries includes: init, udevd, cm, logd, ec, dns, cwmp, inetd, yamp, wpspbc, hostapd, chronyd, rngd, voip.
 
