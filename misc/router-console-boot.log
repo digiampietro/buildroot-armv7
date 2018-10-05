@@ -1,0 +1,868 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2018.06.22 01:12:23 =~=~=~=~=~=~=~=~=~=~=~=
+HELO
+CPU0
+PMCM
+PMCS
+PMCD
+CODE
+L1CD
+MMUI
+ZBBS
+MAIN
+4.1605_114353_121572_132983_136203_142485-1.0.38-118.3
+DRAM
+NVRAM memcfg 0x2327
+MCB chksum 0xf5402a88
+DDR3-1600 CL11 256MB
+Changed Byte Lane LDE
+Changed Byte Lane LDE
+PASS
+FPS0
+BT04
+0001
+BT05
+1016
+NAN3
+RFS2
+NAN5
+
+
+Base: 4.16_05_114353_121572_132983_136203_142485
+CFE version 1.0.38-118.3-S for BCM963138 (32bit,SP,LE) generic
+Build Date: Wed Apr 11 12:28:32 CEST 2018 (l.fornalczyk@quelo)
+Copyright (C) 2000-2015 Broadcom Corporation.
+
+Boot Strap Register:  0x7dfffc2f
+Chip ID: BCM63136B0, ARM Cortex A9 Dual Core: 1000MHz
+Total Memory: 268435456 bytes (256MB)
+NAND ECC BCH-4, page size 0x800 bytes, spare size used 64 bytes
+NAND flash device: , id 0xc2da block 128KB size 262144KB
+pmc_init:PMC using DQM mode
+Board IP address                  : 192.168.1.1:ffffff00  
+Host IP address                   : 192.168.1.100  
+Gateway IP address                :   
+Run from flash/host/tftp (f/h/c)  : f  
+Default host run file name        : vmlinux  
+Default host flash file name      : bcm963xx_fs_kernel  
+Boot delay (0-9 seconds)          : 1  
+Boot image (0=latest, 1=previous) : 0  
+Default host ramdisk file name    :   
+Default ramdisk store address     :   
+Board Id (0-9)                    : 963138_VD5920  
+Number of MAC Addresses (1-32)    : 10  
+Base MAC Address                  : 00:10:18:00:00:00  
+PSI Size (1-128) KBytes           : 24  
+Enable Backup PSI [0|1]           : 0  
+System Log Size (0-256) KBytes    : 0  
+Auxillary File System Size Percent: 0  
+MC memory allocation (MB)         : 4  
+TM memory allocation (MB)         : 20  
+DHD 0 memory allocation (MB)      : 0  
+DHD 1 memory allocation (MB)      : 0  
+DHD 2 memory allocation (MB)      : 0  
+WLan Feature                      : 0x00  
+Voice Board Configuration (0-1)   : ZL88801  
+Partition 1 Size (MB)             :   
+Partition 2 Size (MB)             :   
+Partition 3 Size (MB)             :   
+Partition 4 Size (MB) (Data)      : 1MB  
+
+*** Press any key to stop auto run (1 seconds) ***
+Auto run second count down: 110
+Booting from latest image (address 0x07f00000, flash offset 0x07f00000) ...
+new kernel image format
+Verifying kernel signature...
+Signature OK
+Decompression LZMA Image OK!
+Entry at 0x00008000
+Starting program at 0x00008000
+[    0.000000] Booting Linux on physical CPU 0
+[    0.000000] Initializing cgroup subsys cpuset
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Linux version 3.4.11-rt19 (l.fornalczyk@quelo) (gcc version 4.5.4 20120306 (prerelease) (Linaro GCC 4.5-2012.03) ) #1 SMP PREEMPT Wed Apr 11 12:39:45 CEST 2018
+[    0.000000] CPU: ARMv7 Processor [414fc091] revision 1 (ARMv7), cr=10c53c7d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+[    0.000000] Machine: BCM963138
+[    0.000000] Ignoring unrecognised tag 0x41000603
+[    0.000000] bootconsole [earlycon0] enabled
+[    0.000000] Memory policy: ECC disabled, Data cache writealloc
+[    0.000000] creating a MT_MEMORY_NONCACHED device at physical address of 0x0fe00000 to virtual address at 0xcfe00000 with size of 0x200000 byte for DSL
+[    0.000000] creating a MT_MEMORY_NONCACHED device at physical address of 0x0ea00000 to virtual address at 0xcea00000 with size of 0x1400000 byte for RDPA tm
+[    0.000000] creating a MT_MEMORY_NONCACHED device at physical address of 0x0e600000 to virtual address at 0xce600000 with size of 0x400000 byte for RDPA mc
+[    0.000000] On node 0 totalpages: 58880
+[    0.000000] free_area_init_node: node 0, pgdat c034bde0, node_mem_map c1000000
+[    0.000000]   DMA zone: 32 pages used for memmap
+[    0.000000]   DMA zone: 0 pages reserved
+[    0.000000]   DMA zone: 4064 pages, LIFO batch:0
+[    0.000000]   Normal zone: 480 pages used for memmap
+[    0.000000]   Normal zone: 54304 pages, LIFO batch:15
+[    0.000000] pmc_init:PMC using DQM mode
+[    0.000000] pmc_init:fe1e 3620361 4b004b
+[    0.000000] L310 cache controller enabled
+[    0.000000] l2x0: 16 ways, CACHE_ID 0x410000c9, AUX_CTRL 0x6a450000, Cache size: 524288 B
+[    0.000000] PERCPU: Embedded 7 pages/cpu @c1204000 s5344 r8192 d15136 u32768
+[    0.000000] pcpu-alloc: s5344 r8192 d15136 u32768 alloc=8*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 58368
+[    0.000000] Kernel command line: console=ttyS0,115200 earlyprintk debug root=mtd:rootfs_1 rw rootfstype=jffs2
+[    0.000000] PID hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.000000] Dentry cache hash table entries: 32768 (order: 5, 131072 bytes)
+[    0.000000] Inode-cache hash table entries: 16384 (order: 4, 65536 bytes)
+[    0.000000] Memory: 230MB = 230MB total
+[    0.000000] Memory: 229596k/229596k available, 32548k reserved, 0K highmem
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+[    0.000000]     vmalloc : 0xd0800000 - 0xff000000   ( 744 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xd0000000   ( 256 MB)
+[    0.000000]     modules : 0xbf000000 - 0xc0000000   (  16 MB)
+[    0.000000]       .text : 0xc0008000 - 0xc02f1d04   (2984 kB)
+[    0.000000]       .init : 0xc02f2000 - 0xc030d4e0   ( 110 kB)
+[    0.000000]       .data : 0xc030e000 - 0xc034c940   ( 251 kB)
+[    0.000000]        .bss : 0xc034c964 - 0xc037fcac   ( 205 kB)
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000] 	Dump stacks of tasks blocking RCU-preempt GP.
+[    0.000000] NR_IRQS:256
+[    0.000000] Cortex A9 MPCORE GIC init
+[    0.000000] DIST at fc01f000, CPU_IF at fc01e100
+[    0.000000] map_hw_timer_interrupt,132: interrupt_id 96
+[    0.000000] map_hw_timer_interrupt,132: interrupt_id 97
+[    0.000000] map_hw_timer_interrupt,132: interrupt_id 98
+[    0.000000] map_hw_timer_interrupt,132: interrupt_id 99
+[    0.000000] sched_clock: 32 bits at 1kHz, resolution 1000000ns, wraps every 4294967295ms
+[    0.000000] console [ttyS0] enabled, bootconsole disabled
+[    0.000000] console [ttyS0] enabled, bootconsole disabled
+[    0.002000] Calibrating delay loop... 1980.41 BogoMIPS (lpj=990208)
+[    0.010000] pid_max: default: 32768 minimum: 301
+[    0.011000] Mount-cache hash table entries: 512
+[    0.012000] --Kernel Config--
+[    0.013000]   SMP=1
+[    0.014000]   PREEMPT=1
+[    0.015000]   DEBUG_SPINLOCK=0
+[    0.016000]   DEBUG_MUTEXES=0
+[    0.017000] Initializing cgroup subsys cpuacct
+[    0.018000] Initializing cgroup subsys devices
+[    0.019000] Initializing cgroup subsys freezer
+[    0.020000] CPU: Testing write buffer coherency: ok
+[    0.022000] Broadcom Logger v0.1 Apr 11 2018 12:39:38
+[    0.036000] Setting up static identity map for 0x271498 - 0x2714cc
+[    0.057000] CPU1: Booted secondary processor
+[    0.065000] CPU1: Unknown IPI message 0x1
+[    0.065000] Brought up 2 CPUs
+[    0.065000] SMP: Total of 2 processors activated (3971.07 BogoMIPS).
+[    0.086000] NET: Registered protocol family 16
+[    0.112000] bcm63xx_pcie: setting resistor calibration value to 0xa
+[    0.118000] bcm63xx_pcie: applying serdes parameters
+[    0.178000] PCIE port 0  SSC Disabled
+[    0.706000] PCIE port 0 link-up
+[    0.713000] PCIE port 0  SSC Enabled
+[    0.714000] PCI host bridge to bus 0000:00
+[    0.715000] pci_bus 0000:00: root bus resource [mem 0x90000000-0x9fffffff]
+[    0.716000] pci 0000:00:00.0: [14e4:6313] type 01 class 0x060400
+[    0.718000] pci 0000:00:00.0: PME# supported from D0 D3hot
+[    0.719000] PCI: bus0: Fast back to back transfers disabled
+[    0.720000] pci 0000:01:00.0: [14e4:a8db] type 00 class 0x028000
+[    0.721000] pci 0000:01:00.0: reg 10: [mem 0x00000000-0x00007fff 64bit]
+[    0.722000] pci 0000:01:00.0: supports D1 D2
+[    0.723000] pci 0000:00:00.0: Checking PCIe ASPM for vendor 14e4 device a8db
+[    0.726000] PCI: bus1: Fast back to back transfers disabled
+[    0.727000] pci 0000:00:00.0: BAR 8: assigned [mem 0x90000000-0x900fffff]
+[    0.728000] pci 0000:01:00.0: BAR 0: assigned [mem 0x90000000-0x90007fff 64bit]
+[    0.729000] pci 0000:00:00.0: PCI bridge to [bus 01-01]
+[    0.730000] pci 0000:00:00.0:   bridge window [mem 0x90000000-0x900fffff]
+[    0.731000] PCI: enabling device 0000:00:00.0 (0140 -> 0143)
+[    0.755000] bcm63xx_pcie: setting resistor calibration value to 0xa
+[    0.761000] bcm63xx_pcie: applying serdes parameters
+[    0.821000] PCIE port 1  SSC Disabled
+[    1.348000] PCIE port 1 link-up
+[    1.355000] PCIE port 1  SSC Enabled
+[    1.356000] PCI host bridge to bus 0001:00
+[    1.357000] pci_bus 0001:00: root bus resource [mem 0xa0000000-0xafffffff]
+[    1.358000] pci 0001:00:00.0: [14e4:6313] type 01 class 0x060400
+[    1.359000] pci 0001:00:00.0: PME# supported from D0 D3hot
+[    1.360000] PCI: bus0: Fast back to back transfers disabled
+[    1.361000] pci 0001:01:00.0: [14e4:4365] type 00 class 0x028000
+[    1.362000] pci 0001:01:00.0: reg 10: [mem 0x00000000-0x00007fff 64bit]
+[    1.363000] pci 0001:01:00.0: reg 18: [mem 0x00000000-0x007fffff 64bit]
+[    1.364000] pci 0001:01:00.0: reg 20: [mem 0x00000000-0x000fffff 64bit pref]
+[    1.365000] pci 0001:01:00.0: supports D1 D2
+[    1.366000] pci 0001:00:00.0: Checking PCIe ASPM for vendor 14e4 device 4365
+[    1.367000] pci 0001:00:00.0: Disabling PCIe ASPM for vendor 14e4 device 4365
+[    1.368000] PCI: bus1: Fast back to back transfers disabled
+[    1.369000] pci 0001:00:00.0: BAR 8: assigned [mem 0xa0000000-0xa0bfffff]
+[    1.370000] pci 0001:00:00.0: BAR 9: assigned [mem 0xa0c00000-0xa0cfffff 64bit pref]
+[    1.371000] pci 0001:01:00.0: BAR 2: assigned [mem 0xa0000000-0xa07fffff 64bit]
+[    1.372000] pci 0001:01:00.0: BAR 4: assigned [mem 0xa0c00000-0xa0cfffff 64bit pref]
+[    1.373000] pci 0001:01:00.0: BAR 0: assigned [mem 0xa0800000-0xa0807fff 64bit]
+[    1.374000] pci 0001:00:00.0: PCI bridge to [bus 01-01]
+[    1.375000] pci 0001:00:00.0:   bridge window [mem 0xa0000000-0xa0bfffff]
+[    1.376000] pci 0001:00:00.0:   bridge window [mem 0xa0c00000-0xa0cfffff 64bit pref]
+[    1.377000] PCI: enabling device 0001:00:00.0 (0140 -> 0143)
+[    1.381000] bio: create slab <bio-0> at 0
+[    1.383000] usbcore: registered new interface driver usbfs
+[    1.384000] usbcore: registered new interface driver hub
+[    1.386000] usbcore: registered new device driver usb
+[    1.387000] bcmhs_spi bcmhs_spi.1: master is unqueued, this is deprecated
+[    1.388000] skb_free_task created successfully
+[    1.389000] gbpm_do_work scheduled
+[    1.389000] [0;34mBLOG v3.0 Initialized[0m
+[    1.397000] BLOG Rule v1.0 Initialized
+[    1.398000] Broadcom IQoS v0.1 Apr 11 2018 12:39:42 initialized
+[    1.399000] Broadcom GBPM v0.1 Apr 11 2018 12:39:42 initialized
+[    1.400000] NET: Registered protocol family 8
+[    1.401000] NET: Registered protocol family 20
+[    1.402000] Switching to clocksource timer_cs
+[    1.404000] NET: Registered protocol family 2
+[    1.405000] IP route cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    1.406000] TCP established hash table entries: 8192 (order: 4, 65536 bytes)
+[    1.407000] TCP bind hash table entries: 8192 (order: 4, 98304 bytes)
+[    1.408000] TCP: Hash tables configured (established 8192 bind 8192)
+[    1.409000] TCP: reno registered
+[    1.411000] UDP hash table entries: 128 (order: 0, 4096 bytes)
+[    1.412000] UDP-Lite hash table entries: 128 (order: 0, 4096 bytes)
+[    1.413000] NET: Registered protocol family 1
+[    1.416000] jffs2: version 2.2 (NAND) (SUMMARY) (ZLIB) (LZMA) (RTIME) (c) 2001-2006 Red Hat, Inc.
+[    1.417000] msgmni has been set to 448
+[    1.419000] io scheduler noop registered (default)
+[    1.423000] printk_dump_dev: read_boot_params - mem_size = 0
+[    1.424000] printk_dump_dev: error in init_persistent_buffer - Invalid memory size
+[    1.425000] printk_dump_dev: error in printk_dump_dev_init - failed to create persistent memory buffer
+[    1.426000] brd: module loaded
+[    1.428000] loop: module loaded
+[    1.429000] >> nand_flash_init - entry
+[    1.430000] Broadcom NAND controller (BrcmNand Controller)
+[    1.431000] mtd->oobsize=0, mtd->eccOobSize=0
+[    1.432000] NAND_CS_NAND_XOR=00000000
+[    1.434000] B4: NandSelect=40000001, nandConfig=26152300, chipSelect=0
+[    1.435000] brcmnand_read_id: CS0: dev_id=c2da9095
+[    1.436000] After: NandSelect=00000001, nandConfig=26152300
+[    1.437000] DevId c2da9095 may not be supported.  Will use config info
+[    1.438000] Spare Area Size = 16B/512B
+[    1.439000] Block size=00020000, erase shift=17
+[    1.440000] NAND Config: Reg=26152300, chipSize=256 MB, blockSize=128K, erase_shift=11
+[    1.441000] busWidth=1, pageSize=2048B, page_shift=11, page_mask=000007ff
+[    1.442000] ECC level changed to 4
+[    1.443000] OOB size changed to 16
+[    1.444000] BrcmNAND mfg 0 0 UNSUPPORTED NAND CHIP 256MB on CS0
+[    1.445000] 
+[    1.445000] Found NAND on CS0: ACC=c3840010, cfg=26152300, flashId=c2da9095, tim1=65324458, tim2=80000e54
+[    1.446000] BrcmNAND version = 0x80000700 256MB @00000000
+[    1.447000] brcmnand_scan: B4 nand_select = 00000001
+[    1.448000] brcmnand_scan: After nand_select = 00000001
+[    1.449000] handle_acc_control: default CORR ERR threshold  3 bits
+[    1.450000] ACC: 16 OOB bytes per 512B ECC step; from ID probe: 16
+[    1.451000] page_shift=11, bbt_erase_shift=17, chip_shift=28, phys_erase_shift=17
+[    1.452000] Brcm NAND controller version = 7.0 NAND flash size 256MB @10000000
+[    1.453000] ECC layout=brcmnand_oob_bch4_2k
+[    1.454000] brcmnand_scan:  mtd->oobsize=64
+[    1.455000] brcmnand_scan: oobavail=35, eccsize=512, writesize=2048
+[    1.456000] brcmnand_scan, eccsize=512, writesize=2048, eccsteps=4, ecclevel=4, eccbytes=7
+[    1.457000] -->brcmnand_default_bbt
+[    1.458000] brcmnand_default_bbt: bbt_td = bbt_slc_bch4_main_descr
+[    1.459000] Bad block table Bbt0 found at page 0001ffc0, version 0x01 for chip on CS0
+[    1.460000] Bad block table 1tbB found at page 0001ff80, version 0x01 for chip on CS0
+[    1.461000] brcmnand_reset_corr_threshold: default CORR ERR threshold  3 bits for CS0
+[    1.462000] nand_read_bbt: Bad block at 0x013c0000
+[    1.463000] nand_read_bbt: Bad block at 0x0c1e0000
+[    1.464000] nand_read_bbt: Bad block at 0x0ddc0000
+[    1.465000] nand_read_bbt: Bad block at 0x0f320000
+[    1.466000] rescanning .... 
+[    2.493000] ----- Contents of BBT -----
+[    2.494000] Bad block at 13c0000
+[    2.495000] Bad block at c1e0000
+[    2.496000] Bad block at ddc0000
+[    2.497000] Bad block at f320000
+[    2.498000] ----- END Contents of BBT -----
+[    2.502000] ***** Found YAPS PartitionSplit Marker at 0x080FFF00
+[    2.503000] Creating 8 MTD partitions on "brcmnand.0":
+[    2.504000] 0x000000000000-0x000000020000 : "CFE"
+[    2.506000] 0x000007f00000-0x000008100000 : "bootfs_1"
+[    2.508000] 0x000008100000-0x00000fbc0000 : "rootfs_1"
+[    2.510000] 0x000000020000-0x000007ce0000 : "upgrade"
+[    2.512000] 0x00000fbc0000-0x00000fdc0000 : "conf_fs"
+[    2.513000] 0x00000fdc0000-0x00000fe00000 : "conf_factory"
+[    2.515000] 0x00000fe00000-0x000010000000 : "bbt"
+[    2.517000] 0x000000000000-0x000010000000 : "flash"
+[    2.520000] PPP generic driver version 2.4.2
+[    2.521000] PPP BSD Compression module registered
+[    2.522000] PPP Deflate Compression module registered
+[    2.523000] NET: Registered protocol family 24
+[    2.524000] brcmboard: brcm_board_init entry
+[    2.525000] SES: Button Interrupt 0x2 is enabled
+[    2.526000] WIFI: Button Interrupt 0x1 is enabled
+[    2.527000] SES: LED GPIO 0x8014 is enabled
+[    2.555000] DYING GASP IRQ Initialized and Enabled
+[    2.556000] Serial: BCM63XX driver $Revision: 3.00 $
+[    2.557000] [0;33mMagic SysRq with Auxilliary trigger char enabled (type ^ h for list of supported commands)[0m
+[    2.558000] ttyS0 at MMIO 0xfffe8600 (irq = 64) is a BCM63XX
+[    2.559000] ttyS1 at MMIO 0xfffe8620 (irq = 65) is a BCM63XX
+[    2.560000] GACT probability NOT on
+[    2.561000] Mirror/redirect action on
+[    2.562000] u32 classifier
+[    2.563000]     input device check on
+[    2.564000]     Actions configured
+[    2.566000] TCP: cubic registered
+[    2.567000] Initializing XFRM netlink socket
+[    2.568000] NET: Registered protocol family 17
+[    2.569000] NET: Registered protocol family 15
+[    2.570000] 8021q: 802.1Q VLAN Support v1.8
+[    4.176000] VFS: Mounted root (jffs2 filesystem) on device 31:2.
+[    4.182000] Freeing init memory: 108K
+init started: BusyBox v1.17.3 (2018-04-11 12:29:54 CEST)
+init: setting virtual memory limit 16777216 -1
+
+starting pid 235, tty '': '/etc/init.d/rcS S boot'
+Starting boot.sh ...
+Restore passwd ....
+Restore group ....
+mount virtual fs...
+[    4.827000] udevd (261): /proc/261/oom_adj is deprecated, please use /proc/261/oom_score_adj instead.
+Wed Apr 11 10:29:41 UTC 2018
+Starting /etc/rc.d/S11services.sh ...
+starting pid 274, tty '/dev/ttyS0': '/bin/login'
+
+Please press Enter to activate this console. 
+
+ -- [1;44m Base System Init [m [[1;33m6.12[m]
+
+[[1;34m*[m] [36mStarting Event Controller[m
+[[1;34m*[m] [36mLoading Drivers and Kernel Modules[m
+[[1;34m*[m] [36mStarting Configuration Load[m
+[    6.212000] Bridge firewalling registered
+[[1;34m*[[    6.216000] Initializing MCPD Module
+m] [36mStarting Configuration Manager (B)[m
+[    6.226000] chipinfo: module license 'proprietary' taints kernel.
+[    6.232000] Disabling lock debugging due to kernel taint
+[    6.238000] brcmchipinfo: brcm_chipinfo_init entry
+[    6.280000] ip_tables: (C) 2000-2006 Netfilter Core Team
+[    6.496000] NET: Registered protocol family 10
+[    6.512000] BPM: tot_mem_size=268435456B (256MB), buf_mem_size <15%> =40265310B (38MB), num of buffers=19358, buf size=2080
+[    6.522000] Broadcom BPM Module Char Driver v0.1 Apr 11 2018 12:28:12 Registered<244>[0m
+starting pid 365, tty '/dev/null': 'logd'
+ reporting service status with 'cmclient SET -u boot Device.X_ADB_SystemLog.[Enable=true].Enable true'
+starting pid 368, tty '/dev/null': 'ec'
+[    6.731000] nf_conntrack version 0.5.0 (3589 buckets, 14356 max)
+ERROR #5 Device.X_ADB_SystemLog.[Enable=true].Enable
+[    7.459000] tm_base_addr 0xcea00000, size 20971520, tm_base_addr_phys 0x0ea00000
+[    7.466000] mc_base_addr 0xce600000, size 4194304, mc_base_addr_phys 0x0e600000
+[    7.474000] 
+[    7.474000]  RDP TM memory = 20MB : Max Possible Bufs <6144> of size <2560>; Allocating <5120> bufs; RDP enum <1>
+[    7.489000] ++++Runner gso_desc_pool created successfully
+[    7.523000] bcmxtmrt: Broadcom BCM3136B0 ATM/PTM Network Device v0.9 Apr 11 2018 12:27:58
+[    7.531000] Creating CPU ring for queue number 5 with 256 packets descriptor=0xbf1b9664
+[    7.531000]  Done initializing Ring 5 Base=0xffdf2000 End=0xffdf3000 calculated entries= 256 RDD Base=0x00c06000 descriptor=0xbf1b9664
+[    7.552000] Creating CPU ring for queue number 6 with 256 packets descriptor=0xbf1b96b0
+[    7.552000]  Done initializing Ring 6 Base=0xffdf0000 End=0xffdf1000 calculated entries= 256 RDD Base=0x00c0c000 descriptor=0xbf1b96b0
+[    7.609000] yatta: Unknown symbol yatta__nf_ct_ext_add (err 0)
+[    7.637000] i2c /dev entries driver
+[    7.692000] NBUFF v1.0 Initialized
+[    7.707000] [0;36;44mInitialized fcache state[0m
+[    7.712000] [0;36;44mBroadcom Packet Flow Cache  Char Driver v3.0 Apr 11 2018 12:28:21 Registered<242>[0m
+[    7.722000] Created Proc FS /procfs/fcache
+[    7.726000] [0;36;44mBroadcom Packet Flow Cache registered with netdev chain[0m
+[    7.734000] [0;36;44mBroadcom Packet Flow Cache learning via BLOG enabled.[0m
+[    7.741000] [0;35m[FHW]  pktDbgLvl[0xbf204740]=0[0m
+[    7.746000] [0;34m[FHW]  fhw_construct: [0m
+[    7.751000] [0;36;44mInitialized Fcache HW accelerator layer state[0m
+[    7.764000] flwStatsThread created
+[    7.768000] [0;36;44mConstructed Broadcom Packet Flow Cache v3.0 Apr 11 2018 12:28:21[0m
+[    7.809000] bcmxtmcfg: bcmxtmcfg_init entry
+[    7.841000] 
+[    7.841000] ippt_mod_init:registering device ippt0
+[    7.920000] pmc_switch_power_up: Rgmii Tx clock zone1 enable 0 zone2 enable 0. 
+[    7.941000] 
+[    7.941000]  LINK DOWN IMP Port 
+[    7.948000] Runner Port#0 (Internal MUX Port#2) connects to Crossbar Port#0
+[    7.955000] Switch Port#4 (Internal MUX Port#1) connects to Crossbar Port#1
+[    7.962000] Switch Port#3 (Internal MUX Port#0) connects to Crossbar Port#4
+[    7.969000] Cross Bar MUX Config : Internal Port 00 maps to External Port 04 <reg_val : 0x0000000c>
+[    7.978000] Cross Bar MUX Config : Internal Port 01 maps to External Port 01 <reg_val : 0x0000000c>
+[    7.988000] Cross Bar MUX Config : Internal Port 02 maps to External Port 00 <reg_val : 0x0000000c>
+[    7.997000] Cross Bar MUX Config : Internal Port 02 maps to External Port 00 <reg_val : 0x0000000c>
+[    8.008000] GPIO 36 is assigned to Serdes Fiber Signal Detection.
+[    8.014000] Setting SGMII Calibration value to 0xa
+[    8.019000] SFP Module Plugged in
+[    8.022000] fiberTurnOn: enabling TX for fiber optics
+- [33m CM TR-181 ready[m
+- [33m CM TR-98 ready[m
+[Configuration Load ready]
+[[1;34m*[m] [36mStarting LEDs (B)[m
+[[1;34m*[m] [36mProbing for usb devices...[m
+[[1;34m*[m] [36mEpicentro Software Version: DVA-5592_A1_WI_20180405[m
+[[1;34m*[m] [36mEpicentro Platform Version: 6.0.0.0028[m
+[[1;34m*[m] [36mCleaning dynamic entries...[m
+[LEDs (B) ready]
+[   12.255000] GPIO Pin 24 is configured as SPF MOD_ABS for module insertion detection
+[   12.263000] Broadcom BCM63136B0 Ethernet Network Device v0.1 Apr 11 2018 12:29:44
+[   12.271000] dgasp: kerSysRegisterDyingGaspHandler: bcmsw registered 
+[   12.343000] ++++ disabling GSO on logical_port=0 dev=eth0
+[   12.349000] eth0: <Int sw port: 0> <Logical : 00> PHY_ID <0x06180006 : 0x06> MAC : 00:10:18:00:00:00
+[   12.366000] eth1: <Ext sw port: 0> <Logical : 08> PHY_ID <0x0007f008 : 0x08> MAC : 00:10:18:00:00:00
+[   12.382000] eth2: <Ext sw port: 1> <Logical : 09> PHY_ID <0x0007f009 : 0x09> MAC : 00:10:18:00:00:00
+[   12.398000] eth3: <Ext sw port: 2> <Logical : 10> PHY_ID <0x0007f00a : 0x0a> MAC : 00:10:18:00:00:00
+[   12.420000] eth4: <Ext sw port: 3> <Logical : 11> PHY_ID <0x0007f00b : 0x0b> MAC : 00:10:18:00:00:00
+[   12.437000] eth5: <Ext sw port: 4> <Logical : 12> PHY_ID <0x0007f00c : 0x0c> MAC : 00:10:18:00:00:00
+[   12.449000] Ethernet Auto Power Down and Sleep: Enabled
+[   12.454000] Ext switch port 0; Adv capability change : MII=0x01e1, GMII=0x0f00
+[   12.462000] Ext switch port 1; Adv capability change : MII=0x01e1, GMII=0x0f00
+[   12.469000] Ext switch port 2; Adv capability change : MII=0x01e1, GMII=0x0f00
+[   12.477000] Cross bar port 4 of Ext switch port 3; Adv capability change : MII=0x01e1, GMII=0x0f00
+[   12.486000] Cross bar port 1 of Ext switch port 4; Adv capability change : MII=0x01e1, GMII=0x0f00
+[   12.496000] All Port Bit Map: 0x1f01: eth0,eth1,eth2,eth3,eth4,eth5
+[   12.502000]    Chip WAN Only Ports 0001, Defined WAN Only Ports 0000, WAN Only Port Result: 0x0001:eth0
+[   12.511000]    Chip WAN Preffered Ports 0000, Defined WAN Preffered Ports 0000, WAN Preffered Port Result: 0x0000:
+[   12.522000]    Chip LAN Only Ports 1f00, Defined LAN Only Ports 0000, LAN Only Port Result: 0x1f00:eth1,eth2,eth3,eth4,eth5
+[   12.534000]    WAN/LAN Both Capable Ports 0x0000:
+[   12.553000] Energy Efficient Ethernet: Enabled
+[   12.557000] SFP module unplugged
+[   12.557000] Creating Enet CPU ring for queue number 1 with 512 packets,Descriptor base=ffdec000
+[   12.557000]  Creating Enet CPU ring for queue number 0 with 512 packets,Descriptor base=ffde8000
+[   12.557000]  ===> Activate Deep Green Mode
+[   12.560000] fiberTurnOff: disabling TX for fiber optics
+[   12.580000] Initialized Runner Host Layer
+[   12.584000] Initialized Runner Unicast Layer
+[   12.587000] Initialized Runner L2 Unicast Layer
+[   12.592000] Initialized Runner Multicast Layer
+[   12.598000] [0;36;44mBroadcom Packet Flow Cache HW acceleration enabled.[0m
+[   12.607000] Enabled Runner binding to Flow Cache
+[   12.617000] Initialized Runner Protocol Layer (700)
+[   12.622000] Broadcom Runner Blog Driver Char Driver v0.1 Apr 11 2018 12:28:21 Registered <252>
+[   12.676000] SCSI subsystem initialized
+[   12.777000] RDPA DS WAN UDP Filter Command Driver
+[   12.797000] [1m[34mWifi Forwarding Driver is initialized![0m
+[   12.811000] Initializing WLCSM Module
+[   12.814000] WLCSM Module loaded successfully 
+[   13.035000] DHD_FKB_POOL size is:1280 and entry size:2080
+[   13.037000] fkbpool address range: c8800000 <-> c8a8a000
+[   13.039000] DHD_PKTTAG POOL size is:8000 and entry size:64
+[   13.043000] dhd_module_init in
+[   13.044000] dhd_queue_budget = 256
+[   13.045000] dhd_sta_threshold = 2048
+[   13.046000] dhd_if_threshold = 65536
+[   13.047000] no wifi platform data, skip
+[   13.048000] dhdpcie_chipmatch: Unsupported vendor 14e4 device a8db
+[   13.049000] dhdpcie_pci_probe: chipmatch failed!!
+[   13.050000] PCI_PROBE:  bus 1, slot 0,vendor 14E4, device 4365(good PCI location)
+[   13.051000] dhdpcie_init: can't find adapter info for this chip
+[   13.052000] PCI: enabling device 0001:01:00.0 (0140 -> 0142)
+[   13.173000] DHD: dongle ram size is set to 1835008(orig 1835008) at 0x200000
+[   13.174000] dhd:0: fw path:/etc/wlan/dhd nv path:(null)
+[   13.175000] Creating CPU ring for queue number 7 with 128 packets descriptor=0xbf1b96fc
+[   13.175000]  Done initializing Ring 7 Base=0xffdfe000 End=0xffdfe800 calculated entries= 128 RDD Base=0x00c17000 descriptor=0xbf1b96fc
+[   13.179000] RDPA returned tx wakeup reg = <0x80299004>, val = <0x10000000>
+[   13.180000] RDPA returned rx wakeup reg = <0x8029a004>, val = <0x26000000>
+[   13.182000] Scratch pad is not initialized.
+[   13.183000] dhd_runner_attach: Rx Offload - Enabled, Ring Size = 1024
+[   13.187000] dhd_attach: wl0: pre-allocated buffer mode is disabled (allocskbsz=0)
+[   13.188000] dhd_attach(): thread:dhd_watchdog_thread:2f7 started
+[   13.190000] dhd_attach(): thread:dhd0_dpc:2fb started
+[   13.191000] dhd_deferred_work_init: work queue initialized 
+[   13.192000] Creating CPU ring for queue number 0 with 1024 packets descriptor=0xbf2cfa78
+[   13.192000]  Creating CPU ring for queue number 1 with 1024 packets descriptor=0xbf2cfa94
+[   13.194000]  [1m[34m wfd_bind: Dev wl%d wfd_idx 0 wl_radio_idx 0 Type fkb configured WFD thread wfd0-thrd minQId/maxQId (8/9), status (0) qmask 0x3[0m
+[   13.195000] Instantiating WFD 0 thread
+[   13.196000] dhd:0: fw path:/etc/wlan/dhd nv path:(null)
+[   13.197000] dhd_bus_download_firmware: firmware path=/etc/wlan/dhd, nvram path=
+[   13.199000] dhdpcie_ramsize_adj: Enter
+[   13.202000] fiberTurnOff: disabling TX for fiber optics
+[   13.374000] dhdpcie_ramsize_adj: Adjust dongle RAMSIZE to 0x240000
+[   13.380000] dhdpcie_download_code_file: download firmware /etc/wlan/dhd/4366c0/rtecdc.bin
+[   13.857000] wl:srom/otp not programmed, using main memory mapped srom info(wombo board)
+[   13.858000] wl: ID=pci/1/1/0/
+[   13.859000] wl: ID=pci/1/1/0/
+[   13.862000] wl: loading /etc/wlan/bcm43664_map.bin
+[   13.871000] wl: reading /etc/wlan/bcmcmn_nvramvars.bin, file size=20
+[   13.873000] wl: reading /etc/wlan/bcm43664_nvramvars.bin, file size=20
+[   13.874000] Replace or append with internal Mac Address
+[   13.878000] dhdpcie_bus_write_vars: Download, Upload and compare of NVRAM succeeded.
+[   13.932000] PCIe shared addr (0x002a6fbc) read took 53023 usec before dongle is ready
+[   13.939000] DMA RX offset from shared Area 0
+[   13.944000] dhdpcie_readshared: Dongle advertizes 2 size indices
+[   13.946000] dhdpcie_readshared: Host support DMAing indices: H2D:1 - D2H:1. FW supports it
+[   13.947000] H2D DMA WR INDX : array size 544 = 2 * 266
+[   13.948000] D2H DMA RD INDX : array size 32 = 2 * 3
+[   13.949000] D2H DMA WR INDX : array size 32 = 2 * 3
+[   13.950000] H2D DMA RD INDX : array size 544 = 2 * 266
+[   13.951000] ring_info_raw: 56 
+[   13.952000] e0 6a 43 00 b0 7b 43 00 c4 7d 43 00 d8 7f 43 00 
+[   13.958000] de 7f 43 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[   13.963000] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+[   13.968000] 00 00 00 00 0a 01 00 00 
+[   13.971000] dhdpcie_readshared: max H2D queues 266
+[   13.972000] dhd_bus_start: Initializing 266 h2drings
+[   13.974000] Scratch pad is not initialized.
+[   13.976000] Scratch pad is not initialized.
+[   13.978000] Scratch pad is not initialized.
+[   13.979000] Scratch pad is not initialized.
+[   13.980000] dhd_runner_profile_init: N+M profile = 3 01:1024 -1:2048 -1:1024 -1:0512 01:0512
+[   13.981000] Scratch pad is not initialized.
+[   13.982000] dhd_runner_policy_init: N+M Policy = 0 1 (HW)
+[   14.030000] dhd_bus_cmn_writeshared:
+[   14.031000]   0000: 00 c0 ae 0d 00 00 00 00 
+[   14.032000] dhd_bus_cmn_writeshared:
+[   14.033000]   0000: 00 00 c2 00 00 00 00 00 
+[   14.034000] dhd_bus_cmn_writeshared:
+[   14.035000]   0000: 00 60 5d 09 00 00 00 00 
+[   14.037000] dhd_bus_cmn_writeshared:
+[   14.038000]   0000: 00 40 7e 09 00 00 00 00 
+[   14.039000] dhd_bus_cmn_writeshared:
+[   14.044000]   0000: 00 80 c2 00 00 00 00 00 
+[   14.047000] dhd_bus_cmn_writeshared:
+[   14.051000]   0000: 00 00 60 08 00 00 00 00 
+[   14.055000] dhd_bus_cmn_writeshared:
+[   14.059000]   0000: 00 10 14 00 
+[   14.062000] dhd_bus_cmn_writeshared:
+[   14.066000]   0000: 00 48 57 09 00 00 00 00 
+[   14.071000] dhd_bus_cmn_writeshared:
+[   14.074000]   0000: 00 4c 57 09 00 00 00 00 
+[   14.079000] dhd_bus_cmn_writeshared:
+[   14.082000]   0000: 00 40 57 09 00 00 00 00 
+[   14.087000] dhd_bus_cmn_writeshared:
+[   14.090000]   0000: 00 44 57 09 00 00 00 00 
+[   14.095000] Attach flowrings pool for 264 rings
+[   14.100000] [0;33;40mRunner DHD PCIE: vendor<0x14e4> device<0x4365> bus<1> slot<0>[0m
+[   14.108000] Initial configuration
+[   14.111000] =================================
+[   14.115000] 	rx_post_flow_ring_base_addr : c0c20000
+[   14.120000] 	tx_post_flow_ring_base_addr : 0
+[   14.125000] 	rx_complete_flow_ring_base_addr : c0c28000
+[   14.130000] 	tx_complete_flow_ring_base_addr : 0
+[   14.135000] 
+[   14.137000] 	r2d_wr_arr_base_addr : ffde0000
+[   14.141000] 	d2r_rd_arr_base_addr : ffde0402
+[   14.145000] 	r2d_rd_arr_base_addr : ffde0c00
+[   14.150000] 	d2r_wr_arr_base_addr : ffde0802
+[   14.154000] 	tx_post_mgmt_arr_base_addr : ffde1000
+[   14.159000] 	tx_post_mgmt_arr_base_phys_addr : 9575000
+[   14.164000] 
+[   14.166000] 	r2d_wr_arr_base_phys_addr : 9574000
+[   14.171000] 	d2r_rd_arr_base_phys_addr : 9574402
+[   14.175000] 	r2d_rd_arr_base_phys_addr : 9574c00
+[   14.180000] 	d2r_wr_arr_base_phys_addr : 9574802
+[   14.185000] 
+[   14.186000] 	Doorbell ISR : bf2edc54
+[   14.190000] 	Doorbell CTX : c9568c00
+[   14.194000] [0;33;40mRunner DHD Offload initialization complete[0m
+[   14.202000] dhd_rx_frame: net device is NOT registered. drop event packet
+[   14.203000] dhd_rx_frame: net device is NOT registered. drop event packet
+[   14.204000] CUR_ETHERADDR : 6 
+[   14.207000] 00 10 18 00 00 01 
+[   14.211000] dhd_sync_with_dongle: GET_REVINFO device 0x43c5, vendor 0x14e4, chipnum 0xaa90
+[   14.220000] 
+[   14.220000] Dongle Host Driver, version 7.14.164.19.cpe4.16L05_114353_121572_132983_136203_142485.1-kdb
+[   14.225000] wfd_registerdevice Successfully registered dev wl0 ifidx 0 wfd_idx 0
+[   14.233000] Broadcom PCI Device 0x6313 has allocated with driver pcieport
+[   14.243000] Broadcom PCI Device 0x6313 has allocated with driver pcieport
+[   14.251000] dhd_module_init out
+[   14.713000] Creating CPU ring for queue number 2 with 256 packets descriptor=0xbf1b9580
+[   14.713000]  Done initializing Ring 2 Base=0xffdde000 End=0xffddf000 calculated entries= 256 RDD Base=0x00c3e000 descriptor=0xbf1b9580
+[   14.768000] tun: Universal TUN/TAP device driver, 1.6
+[   14.773000] tun: (C) 1999-2004 Max Krasnyansky <maxk@qualcomm.com>
+[   14.816000] PPP MPPE Compression module registered
+[   14.846000] IPv4 over IPv4 tunneling driver
+[   14.867000] IPv6 over IPv4 tunneling driver
+[   14.910000] zram: num_devices not specified. Using default: 1
+[   14.911000] zram: Creating 1 devices ...
+[   14.972000] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[   15.037000] ++++ Powering up SATA block
+[   15.044000] writing PORT0_SATA3_PCB_BLOCK_ADDR
+[   15.048000] INFO: PLL lock for port0 detected 9100...
+[   15.071000] ++++ Powering up USB blocks
+[   15.079000] ++++ USB POWER ON ++++
+[   15.433000] ehci-platform ehci-platform.0: Generic Platform EHCI Controller
+[   15.439000] ehci-platform ehci-platform.0: new USB bus registered, assigned bus number 1
+[   15.448000] ehci-platform ehci-platform.0: irq 105, io mem 0x8000c300
+[   15.462000] ehci-platform ehci-platform.0: USB 2.0 started, EHCI 1.00
+[   15.479000] hub 1-0:1.0: USB hub found
+[   15.483000] hub 1-0:1.0: 2 ports detected
+[   15.645000] Loading independent TCP/IPv6 endpoint filter target
+[   15.833000] xt_time: kernel timezone is -0000
+[   15.970000] Ebtables v2.0 registered
+[   16.094000] ip6_tables: (C) 2000-2006 Netfilter Core Team
+[   16.226000] NF_TPROXY: Transparent proxy support initialized, version 4.1.0
+[   16.227000] NF_TPROXY: Copyright (c) 2006-2007 BalaBit IT Ltd.
+[   16.288000] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[   16.296000] ohci-platform ohci-platform.0: Generic Platform OHCI Controller
+[   16.307000] ohci-platform ohci-platform.0: new USB bus registered, assigned bus number 2
+[   16.314000] ohci-platform ohci-platform.0: irq 104, io mem 0x8000c400
+[[1;34m*[m] [36mStarting Swap Disk (RAM)[m
+[Swap Disk (RAM) ready]
+[[1;34m*[m] [36mStarting Yatta Transport Fast Forwarding[m
+[   16.339000] Adding 3068k swap on /dev/zram0.  Priority:-1 extents:1 across:3068k SS
+[   16.355000] --SMP support
+[   16.356000] wl: dsl_tx_pkt_flush_len=338
+[   16.361000] wl: norm_wmark_tot=12582, pktc_wmark_tot=12582
+[   16.363000] PCI: enabling device 0000:01:00.0 (0140 -> 0142)
+[   16.365000] wl: passivemode=1
+[   16.366000] wl1: creating kthread wl1-kthrd
+[   16.370000] wl: napimode=0
+[Yatta Transport Fast Forwarding ready]
+[   16.386000] hub 2-0:1.0: USB hub found
+[   16.390000] hub 2-0:1.0: 2 ports detected
+[   16.396000] initvars_cis_pci: Not CIS format
+[   16.397000] Neither SPROM nor OTP has valid image
+[   16.399000] wl:srom/otp not programmed, using main memory mapped srom info(wombo board)
+[   16.400000] wl: ID=pci/0/1/0/
+[   16.401000] wl: ID=pci/0/1/0/
+[   16.408000] wl: loading /etc/wlan/bcm43217_map.bin
+[   16.415000] srom rev:8
+[   16.419000] wl: reading /etc/wlan/bcmcmn_nvramvars.bin, file size=20
+[   16.481000] wl1: allocskbmode=0 currallocskbsz=0
+[   16.485000] Creating CPU ring for queue number 2 with 1024 packets descriptor=0xbf2cfab0
+[   16.485000]  
+[   16.485000] xhci-hcd xhci-hcd.0: xHCI Host Controller
+[   16.485000] xhci-hcd xhci-hcd.0: new USB bus registered, assigned bus number 3
+[   16.485000] xhci-hcd xhci-hcd.0: irq 106, io mem 0x8000d000
+[   16.487000] Creating CPU ring for queue number 3 with 1024 packets descriptor=0xbf2cfacc
+[   16.487000]  
+[   16.493000] [1m[34m wfd_bind: Dev wl%d wfd_idx 1 wl_radio_idx 1 Type skb configured WFD thread wfd1-thrd minQId/maxQId (10/11), status (0) qmask 0xc[0m
+[   16.493000] hub 3-0:1.0: USB hub found
+[   16.493000] hub 3-0:1.0: 0 ports detected
+[   16.493000] xhci-hcd xhci-hcd.0: xHCI Host Controller
+[   16.493000] xhci-hcd xhci-hcd.0: new USB bus registered, assigned bus number 4
+[   16.493000] Instantiating WFD 1 thread
+[   16.505000] hub 4-0:1.0: USB hub found
+[   16.508000] hub 4-0:1.0: 2 ports detected
+[   16.516000] wfd_registerdevice Successfully registered dev wl1 ifidx 0 wfd_idx 1
+[   16.517000] wl1: Broadcom BCM43227 802.11 Wireless Controller 7.14.164.19.cpe4.16L05_114353_121572_132983_136203_142485.1-kdb
+[   16.519000] dgasp: kerSysRegisterDyingGaspHandler: wl1 registered 
+[   16.560000] Loading modules backported from Linux version v4.2-rc1-0-gd770e55
+[   16.577000] Backport generated by backports.git v4.2-rc1-1-0-g83a2518
+[   16.701000] usbcore: registered new interface driver cdc_wdm
+[   16.771000] usbcore: registered new interface driver usblp
+[   16.793000] usbcore: registered new interface driver usbserial
+[   16.796000] usbcore: registered new interface driver usbserial_generic
+[   16.808000] USB Serial support registered for generic
+[   16.810000] usbserial: USB Serial Driver core
+[   16.871000] usbcore: registered new interface driver cdc_ncm
+[   16.896000] usbcore: registered new interface driver huawei_cdc_ncm
+[   17.064000] wfd_registerdevice Successfully registered dev wl0.1 ifidx 1 wfd_idx 0
+[   17.071000] BRCM TRNG registered
+[   17.100000] wfd_registerdevice Successfully registered dev wl1.1 ifidx 1 wfd_idx 1
+[   17.109000] usbcore: registered new interface driver option
+[   17.111000] USB Serial support registered for GSM modem (1-port)
+[   17.118000] Broadcom 63138 WatchDog Timer Driver
+[   17.123000] initialized. heartbeat=30 sec
+[   17.184000] adsl: adsl_init entry
+- [33mInit DSL Line[m
+[   17.221000] bcmxtmcfg: ChipId Rev-b0 
+[   17.224000] bcmxtmcfg: DS xDSL G.inp Mode = DISABLED 
+[   17.229000] bcmxtmcfg: xDSL G.Fast Mode = DISABLED 
+[   17.234000] bcmxtmrt: PTM/ATM Non-Bonding Mode configured in system
+[   17.241000] bcmxtmcfg: Out of sequence call to XTM_ASM_HANDLER::Uninitialize().  Recovering.
+[   17.250000] bcmxtmcfg: ATM Bonding configured in system. Fallback mode = Enabled 
+[   17.257000] bcmxtmcfg: Bonding State is DATA_IDLE 
+[   17.263000] bcmxtmcfg: SID MODE SET to 12 BIT MODE 
+[   17.268000] bcmxtmcfg: ATM Bonding Mgmt Log Area = c954dd18 
+[[1;34m*[m] [36mInterfaceMonitor Init[m
+[   19.568000] *** dslThread dslPid=1842
+[   19.569000] BcmAdsl_Initialize=0xBF952028, g_pFnNotifyCallback=0xBF988278
+[   19.570000] AdslCoreSetSDRAMBaseAddr: pAddr=0x0FE00000 sdramPageAddr=0xCFE00000
+[   19.632000] BcmAdslCoreCalibrate: (cnt1-cnt)=0x03935856, adslCoreCyclesPerMs=999800, BCMOS_MSEC_PER_TICK =1
+[   19.644000] DYING GASP IRQ Disabled
+[   19.661000] DYING GASP IRQ Enabled
+[   19.662000] AdslCoreLoadImage: Gfast PHY
+[   19.768000] AdslCoreSetSdramImageAddr: lmem2=0x10010000, pgSize=0x0 sdramSize=0xAB35C
+[   19.769000] AdslCoreSetSdramImageAddr: lmem2(0x10000) vs ADSL_PHY_SDRAM_BIAS(0x10000); origAddr=0xCFE10000 newAddr=0xCFE10000
+[   19.771000] pSdramPHY=0xCFFFFFF8, 0xAFE3F75F 0x83D532ED
+[   19.772000] AdslCoreSetSdramImageAddr: sdramPageAddr=0xcfe00000, sdramImageAddr=0xcfe10000, sdramPhyImageAddr=0x10010000
+[   19.773000] *** AdslCoreSetXfaceOffset: data[0]=0xFFF7406F data[1]=0x8BF90 ***
+[   19.775000] *** XfaceOffset: 0x6FF90 => 0x8BF90 ***
+[   19.941000] *** AdslCoreSetSdramTrueSize: data[0]=0x679CECFF data[1]=0x98631300 ***
+[   19.942000] *** AdslCoreSetSdramTrueSize: data[0]=0xFFEC9C67 data[1]=0x136398 ***
+[   19.943000] *** PhySdramSize got adjusted: 0xAB35C => 0x136398 ***
+[   19.944000] AdslCoreSharedMemInit: shareMemSize=760896(760896)
+[   19.945000] __AdslCoreHwReset: pAdslX=0xfc78bf90
+[   19.946000] __AdslCoreHwReset: pAdslX->sdramBaseAddr=0x0000e1af, pAdslX->gfcTable[]=0x0000e1cf, adslCorePhyDesc.sdramImageAddr=0xcfe10000
+[   19.962000] AdslCoreHwReset:  pLocSbSta=c62a0000 bkupThreshold=3072
+[   19.963000] AdslCoreHwReset:  AdslOemDataAddr = 0xCFEB0D00, time=12 ms
+[   19.967000] VersionInfo: AfH042p.d26l
+[   19.968000] ***BcmDiagsMgrRegisterClient: 0 ***
+[   19.969000] dgasp: kerSysRegisterDyingGaspHandler: dsl0 registered 
+**** AfH042p.d26l ****
+[   22.180000] fiberTurnOn: enabling TX for fiber optics
+[[1;34m*[m] [36mStarting Firewall[m
+[   22.568000] *** BcmXdslCoreMaintenanceTask: Resetting XdslCore
+[   22.573000] Saving OEM data from 0xCFEB0D00
+[   22.583000] DYING GASP IRQ Disabled
+[   22.602000] DYING GASP IRQ Enabled
+[   22.603000] DYING GASP IRQ Disabled
+[   22.620000] DYING GASP IRQ Enabled
+[   22.621000] AdslCoreLoadImage: Non-Gfast PHY
+[Firewall ready]
+[[1;34m*[m] [36mStarting NAT[m
+[   22.729000] AdslCoreSetSdramImageAddr: lmem2=0x10010000, pgSize=0x0 sdramSize=0x11F5C8
+[   22.730000] AdslCoreSetSdramImageAddr: lmem2(0x10000) vs ADSL_PHY_SDRAM_BIAS(0x10000); origAddr=0xCFE10000 newAddr=0xCFE10000
+[   22.731000] pSdramPHY=0xCFFFFFF8, 0xB7C 0xDEADBEEF
+[   22.732000] AdslCoreSetSdramImageAddr: sdramPageAddr=0xcfe00000, sdramImageAddr=0xcfe10000, sdramPhyImageAddr=0x10010000
+[   22.733000] *** AdslCoreSetXfaceOffset: data[0]=0xFFF9006F data[1]=0x6FF90 ***
+[   22.734000] *** XfaceOffset: 0x8BF90 => 0x6FF90 ***
+[[1;34m*[m] [36mStarting Port Mapping[m
+[Port Mapping ready]
+[NAT ready]
+[[1;34m*[m] [36mStarting QoS[m
+[   23.133000] *** AdslCoreSetSdramTrueSize: data[0]=0xC74DE7FF data[1]=0x38B21800 ***
+[   23.134000] *** AdslCoreSetSdramTrueSize: data[0]=0xFFE74DC7 data[1]=0x18B238 ***
+[   23.135000] *** PhySdramSize got adjusted: 0x11F5C8 => 0x18B238 ***
+[   23.136000] AdslCoreSharedMemInit: shareMemSize=413088(413088)
+[   23.137000] __AdslCoreHwReset: pAdslX=0xfc76ff90
+[   23.138000] __AdslCoreHwReset: pAdslX->sdramBaseAddr=0x0000e1af, pAdslX->gfcTable[]=0x0000e1cf, adslCorePhyDesc.sdramImageAddr=0xcfe10000
+[   23.153000] AdslCoreHwReset:  pLocSbSta=c62a0000 bkupThreshold=3072
+[   23.154000] AdslCoreHwReset:  AdslOemDataAddr = 0xCFF0F83C, time=10 ms
+[   23.155000] VersionInfo: A2pvbH042p.d26l
+**** A2pvbH042p.d26l ****
+[QoS ready]
+[   24.202000] Initializing USB Mass Storage driver...
+[   24.207000] usbcore: registered new interface driver usb-storage
+[   24.208000] USB Mass Storage support registered.
+
+
+ -- [1;44m Prepare Networking [m [[1;33m25.55[m]
+
+- [33mInit USB Interfaces[m
+- [33mInit Bridges (0)[m
+[   24.377000] device eth1 entered promiscuous mode
+[   24.579000] device eth2 entered promiscuous mode
+[   24.781000] device eth3 entered promiscuous mode
+[   24.982000] device eth4 entered promiscuous mode
+[   25.183000] device wl0 entered promiscuous mode
+[   25.191000] device wl1 entered promiscuous mode
+[   25.199000] device wl0.1 entered promiscuous mode
+[   25.206000] device wl1.1 entered promiscuous mode
+==[br0]== 802.1D-2004  -(eth1)--(eth2)--(eth3)--(eth4)--(wl0)--(wl1)--(wl0.1)--(wl1.1)-
+[   26.062000] device br0 entered promiscuous mode
+[   26.170000] ADDRCONF(NETDEV_UP): br0: link is not ready
+
+
+ -- [1;44m Start Networking [m [[1;33m27.55[m]
+
+[[1;34m*[m] [36mStarting DNS client[m
+starting pid 2431, tty '/dev/null': 'dns'
+[DNS client ready]
+[[1;34m*[m] [36mStarting DHCP server[m
+[[1;34m*[m] [36mLAN Ethernet Interfaces - Power UP! (B)[m
+[[1;34meth1[m] up
+[[1;34meth2[m] up
+[[1;34meth3[m] up
+[[1;34meth4[m] up
+starting pid 2607, tty '/dev/null': 'dhcps /tmp/dhcps.conf'
+[[1;34m*[m] [36mStarting Filtering[m
+[Filtering ready]
+[[1;34m*[m] [36mStarting TR-069 agent (B)[m
+[DHCP server ready]
+[TR-069 agent (B) ready]
+[[1;34m*[m] [36mStarting Public Pool[m
+[Public Pool ready]
+[[1;34m*[m] [36mStarting IPv6 services[m
+- [33mDHCPv6 init[m
+
+
+ -- [1;44m Start Network Services [m [[1;33m28.28[m]
+
+[[1;34m*[m] [36mStarting DNS forwarder[m
+[DNS forwarder ready]
+[[1;34m*[m] [36mStarting IGMP proxy[m
+### UPnP: Stopping UPnP service
+### UPnP:  Starting UPnP service
+###            miniupnpd -d -i ppp0 -a br0 -N -I 2 -t 30 
+starting pid 2901, tty '/dev/null': 'cwmp'
+starting pid 2903, tty '/dev/null': 'inetd -f'
+starting pid 2904, tty '/dev/null': 'httpd -u nobody'
+starting pid 2905, tty '/dev/null': 'yamp -c /tmp/yamp.conf -p /tmp/yamp.pid'
+starting pid 2907, tty '/dev/null': 'miniupnpd -d -i ppp0 -a br0 -N -I 2 -t 30'
+[IGMP proxy ready]
+[[1;34m*[m] [36mStarting UPnP service[m
+### UPnP: Stopping UPnP service
+### UPnP:  Starting UPnP service
+###            miniupnpd -d -i ppp0 -a br0 -N -I 2 -t 30 -p 60579
+[UPnP service ready]
+[[1;34m*[m] [36mStarting WPS/WLAN button service (B)[m
+[[1;34m*[m] [36mStartup Software Execution Environments[m
+[[1;34m*[m] [36mStarting VOIP services (B)[m
+
+
+ -- [1;44m System Ready [m [[1;33m29.45[m]
+
+Starting /etc/rc.d/S13acsd.sh ...
+Starting /etc/rc.d/S20voip.sh ...
+[   28.319000] Loading PCM shim driver
+[   28.865000] Endpoint: endpoint_init entry
+ stopping [   28.867000] Endpoint: endpoint_init COMPLETED
+pid '2907' on miniupnpd change.
+starting pid 2975, tty '/dev/null': 'miniupnpd -d -i ppp0 -a br0 -N -I 2 -t 30 -p 60579'
+starting pid 2976, tty '/dev/null': '/usr/sbin/acsd'
+ reporting service status with 'echo failed starting ACSD >/dev/console'
+failed starting ACSD
+Starting /etc/rc.d/S60ipsec.sh ...
+Starting /etc/rc.d/S70vpn.sh ...
+Starting /etc/rc.d/S94printkd.sh ...
+[[1;34m*[m] [36mStarting Printk Dump[m
+[Printk Dump ready]
+Starting /etc/rc.d/S95done ...
+Starting /etc/rc.d/S98rngd ...
+starting pid 3204, tty '/dev/null': 'voip >/dev/console'
+1523442612:881999 :  3204 : AEP ENDPT - Open Broadcom Endopoint Driver
+1523442613:068320 [1 voip] VOI[   35.985000] BOS: Enter bosInit 
+[   35.988000] BOS: Exit bosInit 
+P BASE - Failed to SIOCGIFFLAGS ifname ppp0
+1523442613:068633 [1 voip] VOIP BASE - Failed to SIOCGIFFLAGS ifname ppp0
+1523442613:068984 [1 voip] VOIP BASE - Start  Provisioning Endpoint Configuration
+1523442613:069747 [1 voip] VOIP BASE - Completed Start Provisioning Endpoint
+1523442613:069828 [1 voip] VOIP BASE - Num media profiles 16 VS num channels 10
+1523442613:070431 [1 voip] VOIP BASE - Init PhoneBook L[   36.037000] ******* DSP: Found BCM63138 *******
+inked List
+1523442613:070474 [1 voip] VOIP BASE - Init Line Sett[   36.048000] ******* DSP: In PCM Mode *******
+[   36.052000] ******* DSP: PCM running in 16 bit mode *******
+ing Linked List
+[   36.062000] gInterruptCounter     = 0xBFCB2070 
+[   36.072000] gInterruptErrors      = 0xBFCB2074 
+[   36.082000] halShimEntryCount     = 0x00000002 
+[   36.086000] gDectTestMode           = 0xbfcb21bc 
+[   36.098000] dectBuffStart           = 0xbfcb21a4 
+[   36.102000] gDectRxOutOfSyncCounter = 0xbfcb21c0 
+[   36.112000] gDectTxOutOfSyncCounter = 0xbfcb21c4 
+[   36.122000] ddrAddrTxV              = 0xbfcb2148 
+[   36.132000] ddrAddrRxV              = 0xbfcb214c 
+[   36.136000] 32 ms ECAN tail-length
+[   36.142000] *** dmaCtl[0].rx[0].descVirt = 0xFFDC7000
+[   36.152000] *** dmaCtl[0].rx[1].descVirt = 0xFFDC7008
+[   36.162000] *** dmaCtl[0].tx[0].descVirt = 0xFFDC77D0
+[   36.166000] *** dmaCtl[0].tx[1].descVirt = 0xFFDC77D8
+[   36.178000] *** buffer size: 640
+[   36.180000] *** Ownership for TX desc 1 not set. Use this buffer.
+[   36.196000] Binding 0xce0a4cc0
+[   37.762000] boardHalInit completed
+[   37.768000] DSP: Interrupt Ids
+[   37.770000] ---------------
+[   37.773000] InterruptId      = 148
+[   37.887000] EndpointInit completed
+[   37.889000] dgasp: kerSysRegisterDyingGaspHandler: endpoint registered 
+1523442616:266069 [7 Reconf] VOIP BASE - Failed to SIOCGIFFLAGS ifname ppp0
+1523442616:266371 [7 Reconf] VOIP BASE - Failed to SIOCGIFFLAGS ifname ppp0
+1523442627:261816 [7 Reconf] VOIP BASE - Failed to SIOCGIFFLAGS ifname ppp0
+1523442627:262085 [7 Reconf] VOIP BASE - Failed to SIOCGIFFLAGS ifname ppp0
+Apr 11 12:30:36 miniupnpd[2975]:  (*) urn:schemas-upnp-org:device:InternetGatewayDevice:2
+Apr 11 12:30:36 miniupnpd[2975]:   ->>>> uuid:c454964c-733d-e811-99ec-0cb6d201750c::urn:schemas-upnp-org:device:InternetGatewayDevice:2
+Apr 11 12:30:36 miniupnpd[2975]: SendSSDPNotifies services nt = urn:schemas-upnp-org:service:Layer3Forwarding:1
+
+Apr 11 12:30:36 miniupnpd[2975]: SendSSDPNotifies services usn = uuid:c454964c-733d-e811-99ec-0cb6d201750c::urn:schemas-upnp-org:service:Layer3Forwarding:1
+
+Apr 11 12:30:36 miniupnpd[2975]:  (*) urn:schemas-upnp-org:service:Layer3Forwarding:1
+Apr 11 12:30:36 miniupnpd[2975]:   ->>>> uuid:c454964c-733d-e811-99ec-0cb6d201750c::urn:schemas-upnp-org:service:Layer3Forwarding:1
+Apr 11 12:30:36 miniupnpd[2975]: SendSSDPNotifies case 2 nt = uuid:ea7e964c-733d-e811-99ec-0cb6d201750c, usn = uuid:ea7e964c-733d-e811-99ec-0cb6d201750c
+Apr 11 12:30:36 miniupnpd[2975]:  (*) uuid:ea7e964c-733d-e811-99ec-0cb6d201750c
+Apr 11 12:30:36 miniupnpd[2975]: SendSSDPNotifies case 1 nt = urn:schemas-upnp-org:device:WANConnectionDevice:2, usn = uuid:4097964c-733d-e811-99ec-0cb6d201750c::urn:schemas-upnp-org:device:WANConnectionDevice:2 name = urn:schemas-upnp-org:device:WANConnectionDevice version = 2
+Apr 11 12:30:36 miniupnpd[2975]:  (*) urn:schemas-upnp-org:device:WANConnectionDevice:2
+Apr 11 12:30:36 miniupnpd[2975]:   ->>>> uuid:4097964c-733d-e811-99ec-0cb6d201750c::urn:schemas-upnp-org:device:WANConnectionDevice:2
+Apr 11 12:30:36 miniupnpd[2975]: SendSSDPNotifies services nt = urn:schemas-upnp-org:service:WANPPPConnection:1
+
+Apr 11 12:30:36 miniupnpd[2975]: SendSSDPNotifies services usn = uuid:4097964c-733d-e811-99ec-0cb6d201750c::urn:schemas-upnp-org:service:WANPPPConnection:1
+
+Apr 11 12:30:36 miniupnpd[2975]:  (*) urn:schemas-upnp-org:service:WANPPPConnection:1
+Apr 11 12:30:36 miniupnpd[2975]:   ->>>> uuid:4097964c-733d-e811-99ec-0cb6d201750c::urn:schemas-upnp-org:service:WANPPPConnection:1
+Apr 11 12:30:36 miniupnpd[2975]: SendSSDPNotifies services nt = urn:schemas-upnp-org:service:WANIPv6FirewallControl:1
+
+Apr 11 12:30:36 miniupnpd[2975]: SendSSDPNotifies services usn = uuid:4097964c-733d-e811-99ec-0cb6d201750c::urn:schemas-upnp-org:service:WANIPv6FirewallControl:1
+
+Apr 11 12:30:36 miniupnpd[2975]:  (*) urn:schemas-upnp-org:service:WANIPv6FirewallControl:1
+Apr 11 12:30:36 miniupnpd[2975]:   ->>>> uuid:4097964c-733d-e811-99ec-0cb6d201750c::urn:schemas-upnp-org:service:WANIPv6FirewallControl:1
