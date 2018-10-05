@@ -376,8 +376,8 @@ The main purpose of this reverse engineering project is to modify the router fir
 
 To achieve this goal three main activities are needed:
   * **file system analysis** to analyze interesting router's script especially initial boot sequence and firmware upgrade scripts;
-	* **console output analysis**: re-populate the serial interface on the router, attach a serial console and capture router's output during boot and during upgrade;
-	* **reverse engineer**: select and reverse engineer interesting binaries.
+  * **console output analysis**: re-populate the serial interface on the router, attach a serial console and capture router's output during boot and during upgrade;
+  * **reverse engineer**: select and reverse engineer interesting binaries.
 
 ## File system and console output analysis
 
