@@ -3,12 +3,12 @@ MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . $MYDIR/../set-env.sh
 cd $MYDIR
 export QEMU_AUDIO_DRV="none"
-qemu-system-arm -M        vexpress-a9                                                    \
+qemu-system-arm -M        vexpress-a9                                               \
                 -cpu      cortex-a9                                                      \
                 -m        1024                                                           \
                 -nographic                                                               \
                 -kernel   $BRIMAGES/zImage                                               \
-                -drive    file=$BRIMAGES/rootfs.ext2,index=0,media=disk,format=raw,if=sd \ 
+                -drive    file=$BRIMAGES/rootfs.ext2,index=0,media=disk,format=raw,if=sd \
                 -dtb      $BRIMAGES/vexpress-v2p-ca9.dtb                                 \
                 -net      nic                                                            \
                 -net      user,hostfwd=tcp::2222-:22,hostfwd=tcp::9000-:9000             \
