@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM debian/eol:wheezy
 MAINTAINER Valerio Di Giampietro "valerio@digiampietro.com"
 #
 # increase the version to force recompilation of everything
